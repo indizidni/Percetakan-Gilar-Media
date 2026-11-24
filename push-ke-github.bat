@@ -71,3 +71,4 @@ echo   ke cloud Render.com dan siap dibuka 24 jam dari kampus!
 echo ========================================================
 echo.
 pause
+
