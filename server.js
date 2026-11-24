@@ -922,6 +922,13 @@ const server = http.createServer(async (req, res) => {
     // ============================================
     // STATIC FILE SERVING
     // ============================================
+    // KEAMANAN KRITIS: Blokir akses langsung ke folder /data/, file konfigurasi, dan file tersembunyi
+    if (pathname.startsWith('/data/') || pathname.startsWith('/data') || pathname.includes('/.') || pathname.endsWith('.bat') || pathname.endsWith('.ps1') || pathname.endsWith('.yaml') || pathname.endsWith('.yml')) {
+        res.writeHead(403, { 'Content-Type': 'application/json; charset=UTF-8' });
+        res.end(JSON.stringify({ success: false, message: '403 Forbidden: Akses langsung ke data internal dan konfigurasi sistem diblokir demi keamanan.' }));
+        return;
+    }
+
     let relativePath = pathname;
     if (relativePath.endsWith('/')) {
         relativePath += 'index.html';
