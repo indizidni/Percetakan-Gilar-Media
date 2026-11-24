@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <title>Master Admin Dashboard — Percetakan Gilar Media</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body style="background: var(--bg-primary);">
+
+    <!-- ============================================
+         ADMIN LOGIN GATE (JIKA BELUM LOGIN)
+         ============================================ -->
+    <div id="admin-login-gate" class="auth-gate-wrapper">
+        <div class="auth-gate-card">
+            <!-- Header -->
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div class="logo-badge-cmyk" style="margin:0 auto 1.25rem; width:56px; height:56px; font-size:1.6rem; background:linear-gradient(135deg,#6366f1,#4f46e5); box-shadow:0 8px 25px rgba(99,102,241,0.35);">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2 style="font-size:1.6rem; font-weight:800; letter-spacing:-0.5px;">Master Admin Portal</h2>
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.35rem;">Panel kontrol manajemen eksekutif & finansial Percetakan Gilar Media</p>
+            </div>
+
+            <!-- Quick Auto-Fill Demo Button -->
+            <button type="button" class="quick-demo-pill" id="btn-quick-fill-admin" title="Klik untuk langsung mengisi username dan password admin">
+                <i class="fas fa-bolt" style="color:#eab308;"></i>
+                <span>Klik untuk Isi Otomatis & Masuk: <strong>admin</strong> / <strong>admin123</strong></span>
+            </button>
+
+            <!-- Alert Container -->
+            <div id="admin-login-alert" style="margin-bottom:1rem;"></div>
+
+            <!-- Login Form -->
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-user">Username / Email Admin</label>
+                    <div style="position:relative;">
+                        <input type="text" id="admin-user" required placeholder="admin atau admin@gilarmedia.com" style="padding-left:2.5rem;" autocomplete="username">
+                        <i class="fas fa-user-shield" style="position:absolute; left:0.95rem; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:0.95rem;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-pass">Kata Sandi</label>
+                    <div class="input-password-wrap" style="position:relative;">
+                        <input type="password" id="admin-pass" required placeholder="Masukkan kata sandi admin" style="padding-left:2.5rem; padding-right:2.85rem;" autocomplete="current-password">
+                        <i class="fas fa-lock" style="position:absolute; left:0.95rem; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:0.95rem;"></i>
+                        <button type="button" class="btn-toggle-password" id="btn-toggle-admin-pass" aria-label="Tampilkan / Sembunyikan Kata Sandi">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-submit-admin" style="background:linear-gradient(135deg,#6366f1,#4f46e5); border:none; margin-top:1.25rem; font-weight:800; box-shadow:0 8px 20px rgba(99,102,241,0.3);">
+                    <i class="fas fa-sign-in-alt"></i> Masuk ke Dashboard Admin
+                </button>
+            </form>
+
+            <div style="text-align:center; margin-top:1.75rem; font-size:0.88rem; border-top:1px solid var(--border-color); padding-top:1.25rem;">
+                <a href="/" style="color:var(--accent-start); font-weight:700; text-decoration:none;">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Toko Pelanggan
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+    
+
+
+    <!-- ============================================
+         PORTAL MASTER ADMIN DASHBOARD
+         ============================================ -->
+    <div id="admin-app" style="display:none;">
+        <!-- Top Admin Nav -->
+        <nav class="navbar" style="position:sticky; top:0;">
+            <div class="nav-container">
+                <a href="/admin/" class="nav-logo">
+                    <div class="logo-badge-cmyk" style="background:linear-gradient(135deg,#6366f1,#4f46e5); box-shadow:0 4px 15px rgba(99,102,241,0.4);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span>ADMIN <strong>GILAR MEDIA</strong></span>
+                </a>
+
+                <div class="store-mode-pill" style="background:rgba(99, 102, 241, 0.12); color:#6366f1; border-color:rgba(99, 102, 241, 0.3);">
+                    <span class="pulse-dot" style="background:#6366f1; box-shadow:0 0 8px #6366f1;"></span>
+                    <span id="admin-live-clock">SISTEM KONTROL PUSAT AKTIF</span>
+                </div>
+
+                <div class="nav-actions">
+                    <span class="role-badge badge-admin"><i class="fas fa-user-shield"></i> <span id="admin-name-display">Bapak Hendra (Admin)</span></span>
+                    <a href="/kasir/" class="btn btn-outline btn-sm" target="_blank" title="Buka Kasir POS Toko"><i class="fas fa-cash-register"></i> Kasir POS</a>
+                    <a href="/" class="btn btn-outline btn-sm" target="_blank" title="Lihat Tampilan Toko Web"><i class="fas fa-store"></i> Web Toko</a>
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-admin-logout"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" style="padding-top: 2rem; padding-bottom: 3.5rem;">
+            <!-- Financial Period Filter & Action Ribbon -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
+                <div>
+                    <h2 style="font-size:1.4rem; font-weight:900; margin-bottom:0.25rem; display:flex; align-items:center; gap:0.6rem;">
+                        <i class="fas fa-chart-pie" style="color:var(--accent-start);"></i> Rekapan Keuangan & Arus Kas Percetakan
+                    </h2>
+                    <p style="color:var(--text-secondary); font-size:0.85rem; margin:0;">
+                        Pantau realisasi pendapatan, uang muka (DP 50%), sisa piutang, dan saluran pembayaran secara real-time.
+                    </p>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
+                    <div style="display:flex; align-items:center; gap:0.4rem; background:var(--bg-card); border:1px solid var(--border-color); padding:0.4rem 0.85rem; border-radius:var(--radius-lg);">
+                        <i class="fas fa-calendar-alt" style="color:var(--accent-start); font-size:0.85rem;"></i>
+                        <span style="font-size:0.8rem; font-weight:700; color:var(--text-secondary);">Periode:</span>
+                        <select id="admin-revenue-period" style="background:transparent; border:none; color:var(--text-primary); font-weight:700; font-size:0.85rem; outline:none; cursor:pointer;">
+                            <option value="all" selected>Semua Waktu</option>
+                            <option value="today">Hari Ini</option>
+                            <option value="week">7 Hari Terakhir</option>
+                            <option value="month">Bulan Ini</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-print-financial-recap" style="font-weight:700;">
+                        <i class="fas fa-file-export"></i> Cetak Rekapan Keuangan
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-open-financial-override" style="font-weight:700; border-color:#6366f1; color:#a5b4fc;">
+                        <i class="fas fa-sliders-h"></i> Atur Nominal Finansial
+                    </button>
+                    <span id="override-active-badge" class="badge" style="display:none; background:rgba(99,102,241,0.18); color:#a5b4fc; border:1px solid #6366f1; font-size:0.75rem; padding:0.35rem 0.65rem; border-radius:999px; align-items:center; gap:0.35rem;">
+                        <i class="fas fa-edit"></i> Penyesuaian Kustom Aktif
+                    </span>
+                </div>
+            </div>
+
+            <!-- Financial Metrics Grid (4 Comprehensive Cards) -->
+            <div class="admin-metrics-grid">
+                <div class="admin-metric-card" style="border-top: 3px solid #6366f1;">
+                    <div class="metric-header">
+                        <span>Total Nilai Pesanan (Omset)</span>
+                        <div class="metric-icon" style="background:rgba(99,102,241,0.15); color:#6366f1;"><i class="fas fa-coins"></i></div>
+                    </div>
+                    <h2 id="admin-stat-total-rev">Rp 0</h2>
+                    <small><i class="fas fa-chart-line" style="color:var(--success)"></i> Total nilai bruto pesanan toko</small>
+                </div>
+                <div class="admin-metric-card" style="border-top: 3px solid #10b981;">
+                    <div class="metric-header">
+                        <span>Kas Masuk Nyata (Real Cash In)</span>
+                        <div class="metric-icon" style="background:rgba(16,185,129,0.15); color:#10b981;"><i class="fas fa-hand-holding-usd"></i></div>
+                    </div>
+                    <h2 id="admin-stat-cash-in" style="color: #10b981;">Rp 0</h2>
+                    <small><i class="fas fa-check-double" style="color:#10b981;"></i> Uang riil diterima (Lunas + DP 50%)</small>
+                </div>
+                <div class="admin-metric-card" style="border-top: 3px solid #f59e0b;">
+                    <div class="metric-header">
+                        <span>Sisa Piutang DP (Belum Lunas)</span>
+                        <div class="metric-icon" style="background:rgba(245,158,11,0.15); color:#f59e0b;"><i class="fas fa-hourglass-half"></i></div>
+                    </div>
+                    <h2 id="admin-stat-pending-bal" style="color: #f59e0b;">Rp 0</h2>
+                    <small><i class="fas fa-info-circle" style="color:#f59e0b;"></i> Sisa DP ditagih saat barang diambil</small>
+                </div>
+                <div class="admin-metric-card" style="border-top: 3px solid #8b5cf6;">
+                    <div class="metric-header">
+                        <span>Total Transaksi & AOV</span>
+                        <div class="metric-icon" style="background:rgba(139,92,246,0.15); color:#a78bfa;"><i class="fas fa-receipt"></i></div>
+                    </div>
+                    <h2 id="admin-stat-total-orders" style="color: #a78bfa;">0 Pesanan</h2>
+                    <small>Rata-rata Order: <strong id="admin-stat-aov" style="color:var(--text-primary);">Rp 0</strong></small>
+                </div>
+            </div>
+
+            <!-- Visual Split Progress Bar (Offline Kasir vs Online Web) -->
+            <div class="omset-ratio-container">
+                <div class="omset-ratio-header">
+                    <div>
+                        <span style="color: #f59e0b; margin-right: 1.25rem;">
+                            <i class="fas fa-store"></i> <strong>Offline Kasir:</strong> <span id="admin-stat-offline-rev">Rp 0</span> (<span id="admin-offline-pct">0%</span>)
+                        </span>
+                        <span style="color: #a78bfa;">
+                            <i class="fas fa-globe"></i> <strong>Online Web:</strong> <span id="admin-stat-online-rev">Rp 0</span> (<span id="admin-online-pct">0%</span>)
+                        </span>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px;">
+                        Komparasi Saluran Penjualan
+                    </span>
+                </div>
+                <div class="omset-channel-split-bar">
+                    <div class="split-seg-offline" id="admin-bar-offline" style="width: 50%;"></div>
+                    <div class="split-seg-online" id="admin-bar-online" style="width: 50%;"></div>
+                </div>
+            </div>
+
+            <!-- Payment Channels Breakdown (4 Distinct Channels) -->
+            <div class="channels-breakdown-card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                    <h3 style="font-size: 1.15rem; font-weight: 800;">
+                        <i class="fas fa-credit-card" style="color:var(--accent-start);"></i> Realisasi Saluran Pembayaran (Kas Masuk)
+                    </h3>
+                    <span style="font-size:0.8rem; color:var(--text-tertiary);"><i class="fas fa-sync fa-spin"></i> Live Database Sinkronisasi</span>
+                </div>
+                <div class="channels-grid">
+                    <div class="channel-pill-box">
+                        <div class="channel-icon icon-qris"><i class="fas fa-qrcode"></i></div>
+                        <div>
+                            <span style="font-size: 0.76rem; color: var(--text-tertiary); font-weight: 700;">QRIS DIGITAL</span>
+                            <h3 id="admin-pay-qris" style="font-size:1.15rem; margin:0.15rem 0;">Rp 0</h3>
+                            <small id="admin-pay-qris-sub" style="font-size:0.72rem; color:var(--text-secondary);">0 transaksi (0%)</small>
+                        </div>
+                    </div>
+                    <div class="channel-pill-box">
+                        <div class="channel-icon icon-cash"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <span style="font-size: 0.76rem; color: var(--text-tertiary); font-weight: 700;">TUNAI / CASH KASIR</span>
+                            <h3 id="admin-pay-cash" style="font-size:1.15rem; margin:0.15rem 0;">Rp 0</h3>
+                            <small id="admin-pay-cash-sub" style="font-size:0.72rem; color:var(--text-secondary);">0 transaksi (0%)</small>
+                        </div>
+                    </div>
+                    <div class="channel-pill-box">
+                        <div class="channel-icon icon-bank"><i class="fas fa-university"></i></div>
+                        <div>
+                            <span style="font-size: 0.76rem; color: var(--text-tertiary); font-weight: 700;">TRANSFER BANK VIRTUAL</span>
+                            <h3 id="admin-pay-bank" style="font-size:1.15rem; margin:0.15rem 0;">Rp 0</h3>
+                            <small id="admin-pay-bank-sub" style="font-size:0.72rem; color:var(--text-secondary);">0 transaksi (0%)</small>
+                        </div>
+                    </div>
+                    <div class="channel-pill-box">
+                        <div class="channel-icon icon-ewallet"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <span style="font-size: 0.76rem; color: var(--text-tertiary); font-weight: 700;">SALDO E-WALLET</span>
+                            <h3 id="admin-pay-ewallet" style="font-size:1.15rem; margin:0.15rem 0;">Rp 0</h3>
+                            <small id="admin-pay-ewallet-sub" style="font-size:0.72rem; color:var(--text-secondary);">0 transaksi (0%)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Section Navigation Tabs -->
+            <div class="admin-nav-tabs">
+                <button type="button" class="admin-nav-tab active" data-admin-tab="orders">
+                    <i class="fas fa-file-invoice"></i> Riwayat Semua Transaksi
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="cash">
+                    <i class="fas fa-cash-register"></i> Kas Laci & Modal Pemilik
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="products">
+                    <i class="fas fa-tags"></i> Manajemen Produk & Harga Toko
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="inventory">
+                    <i class="fas fa-boxes"></i> Stok Bahan Mentah Cetak
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="users">
+                    <i class="fas fa-users-cog"></i> Akun Pengguna & Hak Akses (RBAC)
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="security">
+                    <i class="fas fa-shield-alt"></i> Catatan Audit Keamanan
+                </button>
+                <button type="button" class="admin-nav-tab" data-admin-tab="payment-config">
+                    <i class="fas fa-qrcode"></i> Pengaturan Rekening & QRIS
+                </button>
+            </div>
+
+            <!-- Tab: Products & Price Management -->
+            <div class="admin-section-pane" id="admin-pane-products">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800;">
+                            <i class="fas fa-tags" style="color:var(--accent-start)"></i> Manajemen Produk & Pengaturan Harga Toko
+                        </h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem;">
+                            Tambah layanan cetak baru atau ubah tarif harga. Perubahan langsung tersimpan di database dan tampil di toko online & kasir.
+                        </p>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="btn-toggle-add-product" style="font-weight:700;">
+                        <i class="fas fa-plus-circle"></i> Tambah Produk Baru
+                    </button>
+                </div>
+
+                <!-- Category Management Bar -->
+                <div class="admin-category-bar" style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:1.15rem 1.35rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.85rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <span style="font-size:0.9rem; font-weight:800; color:var(--text-primary); text-transform:uppercase; letter-spacing:0.5px;">
+                                <i class="fas fa-layer-group" style="color:var(--accent-start)"></i> Manajemen Kategori Layanan Cetak
+                            </span>
+                            <small style="color:var(--text-tertiary); font-size:0.8rem;">(Edit nama atau hapus kategori)</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline" id="btn-open-add-cat-modal" style="font-weight:700;">
+                            <i class="fas fa-plus-circle"></i> Tambah Kategori Baru
+                        </button>
+                    </div>
+                    <div id="admin-category-pills" style="display:flex; flex-wrap:wrap; gap:0.6rem; align-items:center;">
+                        <!-- Category pills rendered dynamically via js/admin.js -->
+                    </div>
+                </div>
+
+                <!-- Add Product Form Box (Collapsible) -->
+                <div class="admin-add-product-box" id="admin-add-product-box" style="display:none; background:var(--bg-secondary); border:2px dashed var(--accent-start); border-radius:var(--radius-xl); padding:1.5rem; margin-bottom:1.5rem;">
+                    <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-cart-plus" style="color:var(--accent-start)"></i> Formulir Tambah Layanan / Produk Cetak Baru
+                    </h4>
+                    <form id="admin-add-product-form">
+                        <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:0.85rem; margin-bottom:0.85rem;">
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Nama Produk Cetak <span class="required">*</span></label>
+                                <input type="text" id="new-prod-name" placeholder="Contoh: Spanduk Flexi Jerman 510g" required>
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Kategori</label>
+                                <select id="new-prod-cat" style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;">
+                                    <option value="spanduk">Spanduk & X-Banner</option>
+                                    <option value="stiker">Stiker Kromo</option>
+                                    <option value="dokumen">Kartu Nama, Brosur & Foto</option>
+                                    <option value="buku">Undangan, Kalender, Nota & Yasin</option>
+                                    <option value="kemasan">Box Nasi Kemasan</option>
+                                    <option value="jasa">Jasa Desain & Potong Kertas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Tipe Hitungan</label>
+                                <select id="new-prod-type" style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;">
+                                    <option value="meteran">Meteran (P x L m²)</option>
+                                    <option value="lembaran">Lembaran A3+</option>
+                                    <option value="pcs">Pcs Satuan</option>
+                                    <option value="set">Set Display</option>
+                                    <option value="box">Box (100 Pcs)</option>
+                                    <option value="rim">Rim (500 Lbr)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:0.85rem; margin-bottom:0.85rem;">
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Harga Satuan (Rp) <span class="required">*</span></label>
+                                <input type="number" id="new-prod-price" placeholder="Contoh: 35000" min="500" step="500" required>
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Satuan Unit</label>
+                                <input type="text" id="new-prod-unit" placeholder="m2 / lembar / pcs / box" value="pcs" required>
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Waktu Pengerjaan</label>
+                                <input type="text" id="new-prod-time" placeholder="Contoh: 1 - 2 Jam" value="1 - 2 Jam">
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Badge Label</label>
+                                <select id="new-prod-badge" style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;">
+                                    <option value="hot">HOT (Terlaris)</option>
+                                    <option value="new" selected>NEW (Baru)</option>
+                                    <option value="sale">SALE (Promo)</option>
+                                    <option value="">Tanpa Badge</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:0.85rem; margin-bottom:1rem;">
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Deskripsi Singkat Layanan</label>
+                                <input type="text" id="new-prod-desc" placeholder="Tuliskan spesifikasi bahan, ketebalan, dan kegunaan">
+                            </div>
+                            <div>
+                                <label style="font-size:0.82rem; font-weight:700; display:block; margin-bottom:0.3rem;">Link URL Foto Mockup (Opsional)</label>
+                                <input type="url" id="new-prod-img" placeholder="https://images.unsplash.com/...">
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:flex-end; gap:0.75rem;">
+                            <button type="button" class="btn btn-outline" id="btn-cancel-add-prod">Batal</button>
+                            <button type="submit" class="btn btn-success" style="font-weight:700;">
+                                <i class="fas fa-check-circle"></i> Simpan Produk ke Toko
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Products Table -->
+                <div style="overflow-x:auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px;">Foto</th>
+                                <th>Nama Produk Cetak</th>
+                                <th>Kategori</th>
+                                <th>Tipe & Satuan</th>
+                                <th>Harga Jual Toko</th>
+                                <th>Waktu Cetak</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 1: Orders -->
+            <div class="admin-section-pane active" id="admin-pane-orders">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
+                            <i class="fas fa-file-invoice" style="color:var(--accent-start);"></i> Riwayat Semua Transaksi Percetakan
+                            <span class="badge badge-new" id="admin-orders-count-badge" style="font-size:0.75rem;">0 Pesanan</span>
+                        </h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem; margin:0;">
+                            Data transaksi realtime tersimpan permanen di database server (data/orders.json) lengkap dengan status DP 50%, spesifikasi cetak, dan nota resmi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Search & Filters Toolbar -->
+                <div class="admin-filter-bar">
+                    <div class="admin-filter-group" style="flex:1; min-width:260px;">
+                        <i class="fas fa-search" style="color:var(--text-tertiary);"></i>
+                        <input type="text" id="admin-order-search" class="admin-filter-input" placeholder="Cari No. Order, Nama Pelanggan, atau No. WA..." style="flex:1;">
+                    </div>
+                    <div class="admin-filter-group">
+                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary);">Status Bayar:</label>
+                        <select id="admin-order-filter-pay" class="admin-filter-select">
+                            <option value="all" selected>Semua Status Bayar</option>
+                            <option value="menunggu_verifikasi">⏳ Perlu Verifikasi (Struk Terkirim)</option>
+                            <option value="lunas">✅ Lunas (100%)</option>
+                            <option value="dp_dibayar">⏳ Uang Muka (DP 50%)</option>
+                            <option value="belum_bayar">❌ Belum Bayar</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-group">
+                        <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary);">Saluran:</label>
+                        <select id="admin-order-filter-channel" class="admin-filter-select">
+                            <option value="all" selected>Semua Saluran</option>
+                            <option value="offline">Toko Kasir (Offline)</option>
+                            <option value="online">Toko Web (Online)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-print-orders-table" style="font-weight:700;">
+                        <i class="fas fa-print"></i> Cetak Daftar Transaksi
+                    </button>
+                </div>
+
+                <div style="overflow-x:auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th style="min-width:145px;">Tanggal & No. Order</th>
+                                <th>Saluran</th>
+                                <th style="min-width:160px;">Pelanggan</th>
+                                <th style="min-width:240px;">Rincian Item & Spesifikasi</th>
+                                <th>Total Tagihan</th>
+                                <th style="min-width:170px;">Status Pembayaran & DP</th>
+                                <th>Status Produksi</th>
+                                <th style="min-width:175px;">Aksi & Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 2: Inventory -->
+            <div class="admin-section-pane" id="admin-pane-inventory">
+                <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800;">Manajemen Inventori Bahan Percetakan</h3>
+                <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem;">Stok berkurang otomatis seiring berjalannya proses pencetakan dan dapat di-restock langsung:</p>
+                <div style="overflow-x:auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Material Percetakan</th>
+                                <th>Satuan</th>
+                                <th>Stok Tersedia</th>
+                                <th>Batas Minimum</th>
+                                <th style="min-width: 190px;">Aksi Restock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-inventory-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 3: RBAC Users -->
+            <div class="admin-section-pane" id="admin-pane-users">
+                <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800;">Manajemen Pengguna & Pembagian Peran (RBAC)</h3>
+                <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem;">Data akun resmi tersimpan aman di database server (data/users.json) dengan proteksi hash password SHA-256:</p>
+                <div style="overflow-x:auto;">
+                    <table class="admin-data-table">
+                        <thead>
+                            <tr>
+                                <th>Username / ID</th>
+                                <th>Nama Lengkap</th>
+                                <th>Role / Peran</th>
+                                <th>Status Keamanan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-users-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 4: Security Audit -->
+            <div class="admin-section-pane" id="admin-pane-security">
+                <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800;">Catatan Audit Keamanan (Security Audit Trail)</h3>
+                <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem;">Merekam setiap aktivitas autentikasi, transaksi, dan pencegahan akses tidak sah:</p>
+                <div class="audit-logs-container" id="admin-audit-logs"></div>
+            </div>
+
+            <!-- Tab 5: Cash Drawer & Petty Cash Management (Modal Pemilik & Uang Toko) -->
+            <div class="admin-section-pane" id="admin-pane-cash">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.2rem; font-size:1.25rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
+                            <i class="fas fa-cash-register" style="color:#f59e0b;"></i> Manajemen Kas Laci & Modal Uang Kembalian Toko
+                        </h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem; margin:0;">
+                            Kontrol modal awal uang kembalian dari pemilik, penjualan tunai kasir, dan pengeluaran kas kecil operasional fisik.
+                        </p>
+                    </div>
+                    <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-admin-add-cash-in" style="font-weight:700; border-color:#10b981; color:#10b981;">
+                            <i class="fas fa-plus-circle"></i> + Tambah Kas Masuk
+                        </button>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-admin-add-cash-out" style="font-weight:700; border-color:#ef4444; color:#ef4444;">
+                            <i class="fas fa-minus-circle"></i> - Catat Kas Keluar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Baris 1: Setting Modal Kas Awal Pemilik & Live Drawer Summary -->
+                <div style="display:grid; grid-template-columns: 1.1fr 1.9fr; gap:1.25rem; margin-bottom:1.75rem;">
+                    <!-- Card 1: Input / Atur Modal Kas Awal dari Pemilik -->
+                    <div class="admin-metric-card" style="border-top:3px solid #6366f1; height:100%; display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <div class="metric-header">
+                                <span>Modal Awal Kembalian (Pemilik)</span>
+                                <div class="metric-icon" style="background:rgba(99,102,241,0.15); color:#6366f1;"><i class="fas fa-coins"></i></div>
+                            </div>
+                            <h2 id="admin-cash-float-display" style="color:#6366f1; margin:0.35rem 0 0.5rem 0;">Rp 200.000</h2>
+                            <p style="font-size:0.78rem; color:var(--text-secondary); line-height:1.4; margin:0 0 1rem 0;">
+                                Nominal uang pecahan kecil yang disiapkan oleh pemilik untuk modal kembalian di laci kasir saat buka toko.
+                            </p>
+                        </div>
+                        <form id="admin-form-set-float">
+                            <label style="font-size:0.75rem; font-weight:700; color:var(--text-tertiary); display:block; margin-bottom:0.3rem;">Ubah Modal Awal Toko (Rp):</label>
+                            <div style="display:flex; gap:0.4rem; margin-bottom:0.4rem; flex-wrap:wrap;">
+                                <button type="button" class="btn btn-outline btn-sm btn-quick-float" data-amt="100000" style="font-size:0.7rem; padding:0.25rem 0.5rem;">100rb</button>
+                                <button type="button" class="btn btn-outline btn-sm btn-quick-float" data-amt="200000" style="font-size:0.7rem; padding:0.25rem 0.5rem;">200rb</button>
+                                <button type="button" class="btn btn-outline btn-sm btn-quick-float" data-amt="300000" style="font-size:0.7rem; padding:0.25rem 0.5rem;">300rb</button>
+                                <button type="button" class="btn btn-outline btn-sm btn-quick-float" data-amt="500000" style="font-size:0.7rem; padding:0.25rem 0.5rem;">500rb</button>
+                            </div>
+                            <div style="display:flex; gap:0.5rem;">
+                                <input type="number" id="admin-input-float" required placeholder="Contoh: 200000" min="0"
+                                       style="flex:1; padding:0.55rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-secondary); color:var(--text-primary); font-size:0.9rem; font-weight:700;">
+                                <button type="submit" class="btn btn-primary btn-sm" style="font-weight:700;">
+                                    <i class="fas fa-save"></i> Simpan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Card 2: Live Rekonsiliasi Kas Laci -->
+                    <div class="admin-metric-card" style="border-top:3px solid #10b981; height:100%;">
+                        <div class="metric-header">
+                            <span>Rekonsiliasi Real-Time Kas Laci Fisik</span>
+                            <div class="metric-icon" style="background:rgba(16,185,129,0.15); color:#10b981;"><i class="fas fa-check-double"></i></div>
+                        </div>
+                        
+                        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem; margin:1rem 0;">
+                            <div style="background:var(--bg-secondary); padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+                                <span style="font-size:0.72rem; color:var(--text-tertiary); font-weight:700;">PENJUALAN TUNAI (KASIR)</span>
+                                <h3 id="admin-cash-sales-display" style="font-size:1.15rem; color:#10b981; margin:0.25rem 0 0 0;">Rp 0</h3>
+                                <small style="font-size:0.68rem; color:var(--text-tertiary);">Dari nota transaksi</small>
+                            </div>
+                            <div style="background:var(--bg-secondary); padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+                                <span style="font-size:0.72rem; color:var(--text-tertiary); font-weight:700;">KAS MASUK TAMBAHAN</span>
+                                <h3 id="admin-cash-in-display" style="font-size:1.15rem; color:#06b6d4; margin:0.25rem 0 0 0;">+Rp 0</h3>
+                                <small style="font-size:0.68rem; color:var(--text-tertiary);">Suntikan kembalian / lain</small>
+                            </div>
+                            <div style="background:var(--bg-secondary); padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+                                <span style="font-size:0.72rem; color:var(--text-tertiary); font-weight:700;">PENGELUARAN KAS KECIL</span>
+                                <h3 id="admin-cash-out-display" style="font-size:1.15rem; color:#ef4444; margin:0.25rem 0 0 0;">-Rp 0</h3>
+                                <small style="font-size:0.68rem; color:var(--text-tertiary);">Biaya lakban / operasional</small>
+                            </div>
+                        </div>
+
+                        <div style="background:rgba(16,185,129,0.08); border:1.5px solid rgba(16,185,129,0.3); border-radius:var(--radius-md); padding:0.85rem 1.15rem; display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <span style="font-size:0.78rem; font-weight:800; color:#10b981; text-transform:uppercase; letter-spacing:0.5px;">TOTAL SALDO UANG FISIK WAJIB ADA DI LACI:</span>
+                                <div style="font-size:0.72rem; color:var(--text-secondary); margin-top:2px;">(Modal Awal + Penjualan Tunai + Kas Masuk - Kas Keluar)</div>
+                            </div>
+                            <h2 id="admin-cash-total-drawer" style="color:#10b981; font-size:1.6rem; font-weight:900; margin:0; font-family:var(--font-mono);">Rp 200.000</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baris 2: Tabel Buku Jurnal Mutasi Kas -->
+                <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:1.25rem; box-shadow:var(--shadow-sm);">
+                    <h4 style="font-size:1rem; font-weight:800; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-history" style="color:#f59e0b;"></i> Buku Mutasi Kas & Riwayat Pengeluaran Toko
+                    </h4>
+                    <div style="overflow-x:auto;">
+                        <table class="admin-data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:140px;">Waktu & Tanggal</th>
+                                    <th style="width:130px;">Jenis Transaksi</th>
+                                    <th>Kategori</th>
+                                    <th>Keterangan / Keperluan</th>
+                                    <th style="text-align:right; width:135px;">Nominal (Rp)</th>
+                                    <th style="width:160px;">Dicatat Oleh</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-cash-logs-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 6: Pengaturan Rekening & QRIS Toko -->
+            <div class="admin-section-pane" id="admin-pane-payment-config">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.2rem; font-size:1.2rem; font-weight:800; display:flex; align-items:center; gap:0.5rem;">
+                            <i class="fas fa-qrcode" style="color:var(--accent-start)"></i> Pengaturan Rekening Bank & QRIS Toko
+                        </h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem; margin:0;">
+                            Hubungkan barcode QRIS resmi dan rekening bank percetakan Anda. Data ini langsung tampil di halaman checkout toko online pelanggan.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="form-payment-config">
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-bottom:1.5rem;">
+                        <!-- Box 1: Barcode QRIS Toko -->
+                        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:1.25rem;">
+                            <div style="font-size:0.95rem; font-weight:800; color:#38bdf8; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-qrcode"></i> 1. Barcode QRIS Resmi Toko
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nama Merchant QRIS / Toko</label>
+                                <input type="text" id="cfg-qris-merchant" class="admin-filter-input" style="width:100%;" placeholder="Contoh: PERCETAKAN GILAR MEDIA">
+                            </div>
+                            
+                            <div style="text-align:center; padding:1rem; background:rgba(0,0,0,0.25); border:1.5px dashed var(--border-color); border-radius:var(--radius-lg); margin-bottom:0.85rem;">
+                                <img id="cfg-qris-preview" src="" alt="Preview QRIS" style="max-width:180px; max-height:180px; object-fit:contain; border-radius:8px; display:none; margin:0 auto 0.5rem;">
+                                <div id="cfg-qris-placeholder" style="color:var(--text-tertiary); font-size:0.82rem; padding:1.5rem 0;">
+                                    <i class="fas fa-qrcode" style="font-size:2.8rem; margin-bottom:0.4rem; display:block; opacity:0.35;"></i>
+                                    Belum ada foto QRIS kustom (Menggunakan QRIS Generator Standar)
+                                </div>
+                                <input type="file" id="cfg-qris-file" accept="image/*" style="display:none;">
+                                <div style="display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap;">
+                                    <button type="button" class="btn btn-outline btn-sm" id="btn-browse-qris" style="font-size:0.78rem; font-weight:700;">
+                                        <i class="fas fa-upload"></i> Unggah Gambar QRIS Asli
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-sm" id="btn-reset-qris" style="font-size:0.78rem; color:#ef4444; border-color:#ef4444; display:none;">
+                                        <i class="fas fa-trash"></i> Hapus Foto
+                                    </button>
+                                </div>
+                            </div>
+                            <small style="color:var(--text-tertiary); font-size:0.75rem; display:block; line-height:1.4;">
+                                Tips: Masukkan foto barcode QRIS dari BCA Merchant, Mandiri, GoBiz, atau DANA Bisnis. Pelanggan toko bisa langsung scan lewat HP.
+                            </small>
+                        </div>
+
+                        <!-- Box 2: Rekening Bank Transfer -->
+                        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:1.25rem;">
+                            <div style="font-size:0.95rem; font-weight:800; color:#34d399; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-university"></i> 2. Rekening Transfer Bank
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Atas Nama (a.n.) Rekening</label>
+                                <input type="text" id="cfg-bank-holder" class="admin-filter-input" style="width:100%;" placeholder="Contoh: CV. GILAR MEDIA PRINTING">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nomor Rekening Bank BCA</label>
+                                <input type="text" id="cfg-bca-num" class="admin-filter-input" style="width:100%;" placeholder="Contoh: 7829-1029-38">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nomor Rekening Bank BNI</label>
+                                <input type="text" id="cfg-bni-num" class="admin-filter-input" style="width:100%;" placeholder="Contoh: 0928-3746-12">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nomor Rekening Bank Mandiri</label>
+                                <input type="text" id="cfg-mandiri-num" class="admin-filter-input" style="width:100%;" placeholder="Contoh: 137-00-1928374-1">
+                            </div>
+                        </div>
+
+                        <!-- Box 3: Saldo E-Wallet -->
+                        <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-xl); padding:1.25rem;">
+                            <div style="font-size:0.95rem; font-weight:800; color:#f472b6; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-wallet"></i> 3. Saldo E-Wallet (DANA, OVO, GoPay)
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nama Akun E-Wallet</label>
+                                <input type="text" id="cfg-ewallet-holder" class="admin-filter-input" style="width:100%;" placeholder="Contoh: Percetakan Gilar Media (Kasir)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0.85rem;">
+                                <label style="font-size:0.82rem; font-weight:700;">Nomor HP E-Wallet</label>
+                                <input type="text" id="cfg-ewallet-num" class="admin-filter-input" style="width:100%;" placeholder="Contoh: 0812-3456-7890">
+                            </div>
+                            <div style="background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.25); border-radius:var(--radius-md); padding:0.85rem; margin-top:1rem; font-size:0.8rem; color:var(--text-secondary); line-height:1.4;">
+                                <i class="fas fa-shield-alt" style="color:#818cf8;"></i> <strong>Keamanan Finansial:</strong> Setiap perubahan rekening akan otomatis dicatat di log audit keamanan sistem.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end;">
+                        <button type="submit" class="btn btn-primary btn-lg" id="btn-save-payment-config" style="font-weight:800; font-size:0.95rem; padding:0.75rem 1.75rem;">
+                            <i class="fas fa-save"></i> Simpan Pengaturan Rekening & QRIS
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+
+    
+
+    <!-- Modal Edit Produk & Kategori -->
+    <div class="modal-overlay" id="admin-edit-price-modal">
+        <div class="modal" style="max-width: 520px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit" style="color:var(--accent-start)"></i> Ubah Data Produk & Kategori</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-edit-price-form">
+                    <input type="hidden" id="edit-prod-id">
+                    <div class="form-group">
+                        <label for="edit-prod-name">Nama Produk Cetak <span class="required">*</span></label>
+                        <input type="text" id="edit-prod-name" required>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+                        <div class="form-group">
+                            <label for="edit-prod-cat">Kategori Produk <span class="required">*</span></label>
+                            <select id="edit-prod-cat" required style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-prod-badge">Badge Label</label>
+                            <select id="edit-prod-badge" style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;">
+                                <option value="hot">HOT (Terlaris)</option>
+                                <option value="new">NEW (Baru)</option>
+                                <option value="sale">SALE (Promo)</option>
+                                <option value="">Tanpa Badge</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:0.75rem;">
+                        <div class="form-group">
+                            <label for="edit-prod-price">Harga Satuan Baru (Rp) <span class="required">*</span></label>
+                            <input type="number" id="edit-prod-price" min="500" step="500" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-prod-unit">Satuan Hitungan</label>
+                            <input type="text" id="edit-prod-unit" required placeholder="m2 / lembar / pcs">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-prod-time">Waktu Produksi</label>
+                        <input type="text" id="edit-prod-time" placeholder="1 - 2 Jam">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-prod-desc">Deskripsi Layanan</label>
+                        <textarea id="edit-prod-desc" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:1rem; font-weight:800;">
+                        <i class="fas fa-save"></i> Simpan Perubahan Produk & Kategori
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+
+    
+
+    <!-- Modal Kelola Kategori (Tambah / Edit Kategori) -->
+    <div class="modal-overlay" id="admin-category-modal">
+        <div class="modal" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3 id="cat-modal-title"><i class="fas fa-layer-group" style="color:var(--accent-start)"></i> Tambah Kategori Baru</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="admin-category-form">
+                    <input type="hidden" id="cat-action" value="add">
+                    <input type="hidden" id="cat-old-id" value="">
+                    
+                    <div class="form-group">
+                        <label for="cat-name-input">Nama Kategori <span class="required">*</span></label>
+                        <input type="text" id="cat-name-input" required placeholder="Contoh: Merchandise & Souvenir">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cat-id-input">Kode / Slug Kategori (ID Unik)</label>
+                        <input type="text" id="cat-id-input" placeholder="Otomatis dari nama (contoh: merchandise)">
+                        <small style="color:var(--text-tertiary); font-size:0.75rem; display:block; margin-top:0.25rem;">Gunakan huruf kecil dan tanda hubung (-). Jika dikosongkan akan dibuat otomatis.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cat-icon-input">Pilihan Ikon</label>
+                        <select id="cat-icon-input" style="width:100%; padding:0.85rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-card); color:var(--text-primary); font-weight:600;">
+                            <option value="fas fa-tags">🏷️ Label / Tags (fas fa-tags)</option>
+                            <option value="fas fa-scroll">📜 Banner / Spanduk (fas fa-scroll)</option>
+                            <option value="fas fa-sticky-note">📋 Stiker & Label (fas fa-sticky-note)</option>
+                            <option value="fas fa-newspaper">📰 Brosur & Dokumen (fas fa-newspaper)</option>
+                            <option value="fas fa-tshirt">👕 Kaos & Apparel (fas fa-tshirt)</option>
+                            <option value="fas fa-coffee">☕ Mug & Sablon (fas fa-coffee)</option>
+                            <option value="fas fa-box-open">📦 Packaging & Box (fas fa-box-open)</option>
+                            <option value="fas fa-id-card">💳 Kartu Nama / Member (fas fa-id-card)</option>
+                            <option value="fas fa-cogs">⚙️ Layanan Khusus (fas fa-cogs)</option>
+                            <option value="fas fa-print">🖨️ Cetak Percetakan (fas fa-print)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" id="cat-modal-submit-btn" style="margin-top:1.25rem; font-weight:800;">
+                        <i class="fas fa-check-circle"></i> Simpan Kategori
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+
+    
+
+    <!-- Modal Nota Resmi / Invoice Percetakan Gilar Media -->
+    <div class="modal-overlay" id="admin-invoice-modal">
+        <div class="modal" style="max-width: 820px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-card); padding: 0; border: 1px solid var(--border-color); border-radius: var(--radius-xl);">
+            <div class="modal-header" style="flex-shrink: 0; padding: 1.15rem 1.75rem; border-bottom: 1px solid var(--border-color); background: var(--bg-card); margin: 0;">
+                <h3 style="font-size: 1.15rem; font-weight: 800; display:flex; align-items:center; gap:0.5rem; margin: 0;">
+                    <i class="fas fa-file-invoice" style="color:var(--accent-start)"></i> Nota Resmi Transaksi & Surat Perintah Kerja (SPK)
+                </h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            
+            <!-- Area Cetak Nota -->
+            <div class="modal-body" style="flex: 1 1 auto; overflow-y: auto; padding: 1.5rem; background: var(--bg-primary);">
+                <div id="invoice-print-area" class="invoice-sheet">
+                <!-- Kop Percetakan -->
+                <div class="invoice-header">
+                    <div class="invoice-brand">
+                        <h2><i class="fas fa-print" style="color:#4f46e5;"></i> PERCETAKAN GILAR MEDIA</h2>
+                        <p>Solusi Percetakan Digital, Offset, Sablon Modern & Kemasan Berkualitas Tinggi</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Jl. Percetakan Utama No. 88, Kota Solusindo | <i class="fab fa-whatsapp"></i> WA: 0812-3456-7890 | Telp: (021) 7890-1234</p>
+                        <p><i class="fas fa-envelope"></i> info@gilarmedia.com | NIB: 9120004512034 | NPWP: 82.910.456.7-012.000</p>
+                    </div>
+                    <div class="invoice-title-block">
+                        <h1>NOTA INVOICE</h1>
+                        <p style="font-size: 0.92rem; font-weight: 800; color: #1e293b; margin:0;" id="inv-order-id">DM-ONL-0000</p>
+                        <p style="font-size: 0.78rem; color: #64748b; margin: 0.2rem 0 0 0;" id="inv-created-at">-</p>
+                    </div>
+                </div>
+
+                <!-- Info Pelanggan & Transaksi -->
+                <div class="invoice-meta-grid">
+                    <div class="invoice-meta-col">
+                        <p><strong>DITUJUKAN KEPADA:</strong></p>
+                        <p>Nama: <strong id="inv-cust-name">-</strong></p>
+                        <p>WhatsApp: <span id="inv-cust-phone">-</span></p>
+                        <p>Alamat / Catatan: <span id="inv-cust-address">-</span></p>
+                    </div>
+                    <div class="invoice-meta-col">
+                        <p><strong>DETAIL TRANSAKSI:</strong></p>
+                        <p>Saluran Pesanan: <strong id="inv-channel">-</strong></p>
+                        <p>Metode Pembayaran: <strong id="inv-pay-method">-</strong></p>
+                        <p>Status Pelunasan: <span id="inv-pay-status-badge">-</span></p>
+                        <p>Petugas Kasir / Admin: <span id="inv-cashier">-</span></p>
+                    </div>
+                </div>
+
+                <!-- Tabel Item Pesanan -->
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35px; text-align:center;">No</th>
+                            <th>Item Layanan & Spesifikasi Cetak</th>
+                            <th style="text-align: center; width: 60px;">Qty</th>
+                            <th style="text-align: right; width: 110px;">Harga Satuan</th>
+                            <th style="text-align: right; width: 120px;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inv-items-tbody"></tbody>
+                </table>
+
+                <!-- Ringkasan Finansial & Catatan Ketentuan -->
+                <div class="invoice-summary-box">
+                    <div class="invoice-notes">
+                        <strong>SYARAT & KETENTUAN PERCETAKAN:</strong>
+                        <ol>
+                            <li>Hasil cetak dikerjakan sesuai file desain yang telah disetujui (ACC).</li>
+                            <li>Pesanan DP 50% wajib dilunasi sebelum barang diambil/dikirim.</li>
+                            <li>Komplain hasil cetak maksimal 1x24 jam sejak pesanan diterima dengan menyertakan nota ini.</li>
+                        </ol>
+                    </div>
+                    <div class="invoice-totals">
+                        <div class="invoice-totals-row">
+                            <span>Subtotal Item</span>
+                            <span id="inv-subtotal">Rp 0</span>
+                        </div>
+                        <div class="invoice-totals-row">
+                            <span>Biaya Finishing & Desain</span>
+                            <span>Termasuk</span>
+                        </div>
+                        <div class="invoice-totals-row grand-total">
+                            <span>TOTAL TAGIHAN</span>
+                            <span id="inv-total">Rp 0</span>
+                        </div>
+                        <div class="invoice-totals-row highlight-dp" id="inv-row-dp">
+                            <span>Uang Muka (DP 50%) Diterima</span>
+                            <span id="inv-dp-paid">Rp 0</span>
+                        </div>
+                        <div class="invoice-totals-row highlight-sisa" id="inv-row-sisa">
+                            <span>SISA TAGIHAN / PIUTANG</span>
+                            <span id="inv-remaining">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stempel Validasi & Barcode Nota Resmi -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin:1.25rem 0; padding:0.75rem 1rem; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:6px; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <div id="inv-stamp-badge" style="display:inline-block; padding:4px 14px; border:2px solid #16a34a; color:#16a34a; font-weight:900; font-size:0.85rem; letter-spacing:1.5px; border-radius:4px; text-transform:uppercase;">
+                            LUNAS / VERIFIED
+                        </div>
+                        <div style="font-size:0.72rem; color:#64748b; margin-top:4px;">
+                            <i class="fas fa-shield-alt" style="color:#4f46e5;"></i> Terverifikasi Digital oleh Sistem Kasir & Admin Percetakan Gilar Media
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div id="inv-barcode-svg" style="display:inline-block;"></div>
+                        <div style="font-size:0.68rem; font-family:var(--font-mono); letter-spacing:2px; color:#475569; font-weight:700;" id="inv-barcode-text">* DM-0000 *</div>
+                    </div>
+                </div>
+
+                <!-- Tanda Tangan Kasir & Pelanggan -->
+                <div class="invoice-signatures">
+                    <div>
+                        <span>Hormat Kami,</span>
+                        <div class="signature-line" id="inv-sig-cashier">Percetakan Gilar Media</div>
+                    </div>
+                    <div>
+                        <span>Tanda Terima Pemesan,</span>
+                        <div class="signature-line" id="inv-sig-customer">Nama Pelanggan</div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; padding-top:0.6rem; border-top:1px dashed #e2e8f0; display:flex; justify-content:space-between; font-size:0.68rem; color:#64748b;">
+                    <span>Bukti transaksi resmi yang sah. Simpan nota ini untuk pengambilan hasil cetak di outlet.</span>
+                    <span>Waktu Cetak: <span id="inv-print-time">-</span></span>
+                </div>
+            </div>
+            </div>
+
+            <!-- Tombol Aksi Modal (Tidak ikut tercetak) -->
+            <div class="invoice-modal-actions" style="flex-shrink: 0; display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.75rem; border-top:1px solid var(--border-color); background: var(--bg-card); margin: 0; flex-wrap:wrap; gap:0.75rem;">
+                <div id="inv-settle-action-container">
+                    <!-- Tombol lunasi DP jika belum lunas -->
+                </div>
+                <div style="display:flex; gap:0.65rem;">
+                    <button type="button" class="btn btn-outline" data-modal-close>Tutup</button>
+                    <button type="button" class="btn btn-primary" id="btn-print-invoice-action" style="font-weight:700;">
+                        <i class="fas fa-print"></i> Cetak Nota Resmi (Print / PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+
+    
+
+    <!-- Modal Preview & Cetak Laporan Rekapan Keuangan Percetakan -->
+    <div class="modal-overlay" id="admin-financial-recap-modal">
+        <div class="modal" style="max-width: 960px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-card); padding: 0; border: 1px solid var(--border-color); border-radius: var(--radius-xl);">
+            <div class="modal-header" style="flex-shrink: 0; padding: 1.15rem 1.75rem; border-bottom: 1px solid var(--border-color); background: var(--bg-card); margin: 0;">
+                <h3 style="font-size: 1.15rem; font-weight: 800; display:flex; align-items:center; gap:0.5rem; margin: 0;">
+                    <i class="fas fa-file-invoice-dollar" style="color:var(--accent-start)"></i> Laporan Rekapitulasi Keuangan & Arus Kas Percetakan
+                </h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Scrollable Body with Clean Margins -->
+            <div class="modal-body" style="flex: 1 1 auto; overflow-y: auto; padding: 1.5rem; background: var(--bg-primary);">
+                <!-- Periode Quick-Filter Ribbon inside Modal -->
+                <div class="financial-modal-filter-bar" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; padding:0.75rem 1rem; background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-color); flex-wrap:wrap; gap:0.75rem;">
+                    <div style="display:flex; align-items:center; gap:0.6rem;">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--text-secondary);"><i class="fas fa-filter"></i> Filter Periode Laporan:</span>
+                        <select id="modal-recap-period-select" style="padding:0.4rem 0.8rem; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-card); color:var(--text-primary); font-weight:700; font-size:0.85rem; cursor:pointer;">
+                            <option value="all">Semua Waktu (Akumulasi)</option>
+                            <option value="today">Hari Ini</option>
+                            <option value="week">7 Hari Terakhir</option>
+                            <option value="month">Bulan Ini</option>
+                        </select>
+                    </div>
+                    <div style="font-size:0.8rem; color:var(--text-tertiary);">
+                        <i class="fas fa-sync-alt"></i> Data terhubung real-time dengan server database
+                    </div>
+                </div>
+
+                <!-- Area Cetak Laporan Keuangan (A4 Sheet View) -->
+                <div id="financial-recap-print-area" class="financial-sheet">
+                    <!-- Dynamically generated by AdminModule -->
+                </div>
+            </div>
+
+            <!-- Tombol Aksi Modal (Tidak ikut tercetak) -->
+            <div class="financial-modal-actions" style="flex-shrink: 0; display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.75rem; border-top:1px solid var(--border-color); background: var(--bg-card); margin: 0; flex-wrap:wrap; gap:0.75rem;">
+                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                    <i class="fas fa-check-circle" style="color:var(--success);"></i> Dokumen siap cetak ke printer fisik atau simpan sebagai dokumen PDF resmi.
+                </div>
+                <div style="display:flex; gap:0.65rem;">
+                    <button type="button" class="btn btn-outline" data-modal-close>Tutup</button>
+                    <button type="button" class="btn btn-primary" id="btn-do-print-financial" style="font-weight:700; background:linear-gradient(135deg,var(--accent-start),#6d28d9); border-color:#6d28d9;">
+                        <i class="fas fa-print"></i> Cetak Laporan Keuangan (Print / PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    <!-- Modal Admin Catat Kas Masuk / Suntikan Uang Kembalian -->
+    <div class="modal-overlay" id="admin-modal-cash-in">
+        <div class="modal" style="max-width: 460px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus-circle" style="color:var(--success);"></i> Tambah Kas Masuk / Suntikan Kembalian</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <form id="admin-form-cash-in">
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Nominal Kas Masuk (Rp) *</label>
+                        <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-in" data-amt="50000">+50rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-in" data-amt="100000">+100rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-in" data-amt="200000">+200rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-in" data-amt="500000">+500rb</button>
+                        </div>
+                        <input type="number" id="admin-input-cash-in-amt" required placeholder="Contoh: 100000" min="1000"
+                               style="width:100%; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:1.1rem; font-weight:800;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Kategori Pemasukan</label>
+                        <select id="admin-select-cash-in-cat" style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                            <option value="Suntikan Uang Kembalian dari Pemilik" selected>Suntikan Uang Kembalian dari Pemilik</option>
+                            <option value="Penerimaan Tunai Piutang / Pelunasan Manual">Penerimaan Tunai Piutang / Pelunasan Manual</option>
+                            <option value="Sisa Pengembalian Belanja Toko">Sisa Pengembalian Belanja Toko</option>
+                            <option value="Pemasukan Kas Toko Lainnya">Pemasukan Kas Toko Lainnya</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Keterangan / Catatan *</label>
+                        <input type="text" id="admin-input-cash-in-notes" required placeholder="Contoh: Tambahan modal uang kembalian pecahan kecil untuk kasir"
+                               style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block btn-lg" style="font-weight:800;">
+                        <i class="fas fa-check-circle"></i> Tambahkan ke Laci Toko
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Admin Catat Pengeluaran Toko / Tarik Kas Pemilik -->
+    <div class="modal-overlay" id="admin-modal-cash-out">
+        <div class="modal" style="max-width: 460px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-minus-circle" style="color:var(--danger);"></i> Catat Pengeluaran Kas Toko</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <form id="admin-form-cash-out">
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Nominal Pengeluaran (Rp) *</label>
+                        <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-out" data-amt="20000">20rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-out" data-amt="50000">50rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-out" data-amt="100000">100rb</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-admin-quick-out" data-amt="200000">200rb</button>
+                        </div>
+                        <input type="number" id="admin-input-cash-out-amt" required placeholder="Contoh: 50000" min="500"
+                               style="width:100%; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:1.1rem; font-weight:800;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Kategori Pengeluaran</label>
+                        <select id="admin-select-cash-out-cat" style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                            <option value="Beli Perlengkapan Packing (Lakban/ATK)" selected>Beli Perlengkapan Packing (Lakban/ATK)</option>
+                            <option value="Bensin & Transportasi Kurir Antar Cetakan">Bensin & Transportasi Kurir Antar Cetakan</option>
+                            <option value="Konsumsi & Air Galon Toko">Konsumsi & Air Galon Toko</option>
+                            <option value="Biaya Maintenance / Servis Ringan Mesin">Biaya Maintenance / Servis Ringan Mesin</option>
+                            <option value="Penarikan Kas oleh Pemilik (Owner Draw)">Penarikan Kas oleh Pemilik (Owner Draw)</option>
+                            <option value="Pengeluaran Operasional Lainnya">Pengeluaran Operasional Lainnya</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Keterangan / Keperluan *</label>
+                        <input type="text" id="admin-input-cash-out-notes" required placeholder="Contoh: Beli lakban & isolasi untuk packing pesanan"
+                               style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block btn-lg" style="font-weight:800;">
+                        <i class="fas fa-receipt"></i> Simpan Pengeluaran Kas
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Penyesuaian Angka Finansial (Master Admin) -->
+    <div class="modal-overlay" id="modal-financial-override">
+        <div class="modal" style="max-width: 780px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" style="display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-sliders-h" style="color:#6366f1;"></i> Atur & Sesuaikan Angka Finansial
+                    </h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary); margin:0.25rem 0 0 0;">
+                        Khusus Master Admin: Sesuaikan nominal omset, kas masuk, piutang, dan saluran transaksi untuk pembukuan khusus atau demo.
+                    </p>
+                </div>
+                <button type="button" class="modal-close" onclick="UI.closeModal('modal-financial-override')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:1.25rem;">
+                <!-- Status Mode Aktif Switch -->
+                <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; margin-bottom:1.25rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+                    <div>
+                        <div style="font-weight:800; font-size:0.95rem; color:var(--text-primary); display:flex; align-items:center; gap:0.5rem;">
+                            <span>Status Tampilan:</span>
+                            <span id="override-status-pill" class="badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid #10b981;">Mode Otomatis (Database Transaksi)</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">
+                            Aktifkan toggle di sebelah kanan untuk menerapkan angka penyesuaian khusus Anda ke seluruh kartu metrik & dokumen cetak.
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <label class="switch-toggle">
+                            <input type="checkbox" id="override-enabled-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span id="override-toggle-label" style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Gunakan Nilai Kustom</span>
+                    </div>
+                </div>
+
+                <!-- Tombol Pintas Preset Cepat -->
+                <div style="margin-bottom:1.25rem; background:rgba(99,102,241,0.06); border:1px solid rgba(99,102,241,0.25); border-radius:var(--radius-md); padding:0.85rem;">
+                    <div style="font-size:0.8rem; font-weight:800; color:#a5b4fc; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:0.4rem;">
+                        <i class="fas fa-magic"></i> Tombol Pintas Preset Cepat (1-Klik Isi Form)
+                    </div>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-preset-copy-db" style="font-size:0.78rem;">
+                            <i class="fas fa-copy"></i> Salin Nilai Database Saat Ini
+                        </button>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-preset-active-shop" style="font-size:0.78rem;">
+                            <i class="fas fa-store"></i> Preset Toko Aktif (~Rp 1,5 Juta)
+                        </button>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-preset-big-tender" style="font-size:0.78rem;">
+                            <i class="fas fa-building"></i> Preset Skala Besar (~Rp 8,5 Juta)
+                        </button>
+                    </div>
+                </div>
+
+                <form id="form-financial-override">
+                    <!-- Section 1: 4 Metrik Kartu Utama -->
+                    <div style="margin-bottom:1.25rem;">
+                        <h4 style="font-size:0.85rem; font-weight:800; color:#818cf8; margin-bottom:0.75rem; text-transform:uppercase; display:flex; align-items:center; gap:0.4rem;">
+                            <i class="fas fa-chart-pie"></i> 1. Metrik 4 Kartu Utama Dashboard
+                        </h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem;">
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Total Nilai Pesanan / Omset Bruto (Rp)</label>
+                                <input type="number" id="override-input-total-rev" required min="0" step="1000" class="form-control" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                            </div>
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Kas Masuk Nyata / Real Cash In (Rp)</label>
+                                <input type="number" id="override-input-cash-in" required min="0" step="1000" class="form-control" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                            </div>
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Sisa Piutang DP Belum Lunas (Rp)</label>
+                                <input type="number" id="override-input-pending-bal" required min="0" step="1000" class="form-control" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                            </div>
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Total Pesanan & Rata-rata AOV</label>
+                                <div style="display:flex; gap:0.5rem;">
+                                    <input type="number" id="override-input-order-count" placeholder="Jml Order" required min="0" class="form-control" style="width:40%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                                    <input type="number" id="override-input-aov" placeholder="AOV (Rp)" required min="0" step="500" class="form-control" style="width:60%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Komparasi Saluran Offline vs Online -->
+                    <div style="border-top:1px dashed var(--border-color); padding-top:1rem; margin-bottom:1.25rem;">
+                        <h4 style="font-size:0.85rem; font-weight:800; color:#818cf8; margin-bottom:0.75rem; text-transform:uppercase; display:flex; align-items:center; gap:0.4rem;">
+                            <i class="fas fa-store-alt"></i> 2. Komparasi Saluran Penjualan
+                        </h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem;">
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Pendapatan Offline Kasir (Rp)</label>
+                                <input type="number" id="override-input-offline-rev" required min="0" step="1000" class="form-control" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                            </div>
+                            <div>
+                                <label style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:0.25rem;">Pendapatan Online Web (Rp)</label>
+                                <input type="number" id="override-input-online-rev" required min="0" step="1000" class="form-control" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:700;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Realisasi 4 Saluran Pembayaran (Kas Masuk) -->
+                    <div style="border-top:1px dashed var(--border-color); padding-top:1rem; margin-bottom:1.5rem;">
+                        <h4 style="font-size:0.85rem; font-weight:800; color:#818cf8; margin-bottom:0.75rem; text-transform:uppercase; display:flex; align-items:center; gap:0.4rem;">
+                            <i class="fas fa-credit-card"></i> 3. Realisasi Saluran Pembayaran (Kas Masuk)
+                        </h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:0.85rem;">
+                            <!-- QRIS -->
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem;">
+                                <div style="font-weight:700; font-size:0.85rem; color:#38bdf8; margin-bottom:0.35rem;">
+                                    <i class="fas fa-qrcode"></i> QRIS Digital
+                                </div>
+                                <div style="display:flex; flex-direction:column; gap:0.35rem;">
+                                    <input type="number" id="override-input-qris-total" placeholder="Nominal Rp" min="0" step="1000" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                    <input type="number" id="override-input-qris-count" placeholder="Jml Transaksi" min="0" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                </div>
+                            </div>
+                            <!-- Tunai -->
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem;">
+                                <div style="font-weight:700; font-size:0.85rem; color:#10b981; margin-bottom:0.35rem;">
+                                    <i class="fas fa-money-bill-wave"></i> Tunai / Cash Kasir
+                                </div>
+                                <div style="display:flex; flex-direction:column; gap:0.35rem;">
+                                    <input type="number" id="override-input-cash-total" placeholder="Nominal Rp" min="0" step="1000" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                    <input type="number" id="override-input-cash-count" placeholder="Jml Transaksi" min="0" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                </div>
+                            </div>
+                            <!-- Bank -->
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem;">
+                                <div style="font-weight:700; font-size:0.85rem; color:#6366f1; margin-bottom:0.35rem;">
+                                    <i class="fas fa-university"></i> Transfer Bank Virtual
+                                </div>
+                                <div style="display:flex; flex-direction:column; gap:0.35rem;">
+                                    <input type="number" id="override-input-bank-total" placeholder="Nominal Rp" min="0" step="1000" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                    <input type="number" id="override-input-bank-count" placeholder="Jml Transaksi" min="0" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                </div>
+                            </div>
+                            <!-- E-Wallet -->
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem;">
+                                <div style="font-weight:700; font-size:0.85rem; color:#ec4899; margin-bottom:0.35rem;">
+                                    <i class="fas fa-mobile-alt"></i> Saldo E-Wallet
+                                </div>
+                                <div style="display:flex; flex-direction:column; gap:0.35rem;">
+                                    <input type="number" id="override-input-ewallet-total" placeholder="Nominal Rp" min="0" step="1000" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                    <input type="number" id="override-input-ewallet-count" placeholder="Jml Transaksi" min="0" class="form-control" style="width:100%; padding:0.5rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-card); color:var(--text-primary); font-size:0.85rem;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; flex-wrap:wrap; border-top:1px solid var(--border-color); padding-top:1rem;">
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-reset-financial-override" style="color:#ef4444; border-color:#ef4444;">
+                            <i class="fas fa-undo"></i> Kembalikan ke Hitungan Otomatis Database
+                        </button>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button type="button" class="btn btn-outline" onclick="UI.closeModal('modal-financial-override')">Tutup</button>
+                            <button type="submit" class="btn btn-primary" style="background:#6366f1; border-color:#6366f1; font-weight:700;">
+                                <i class="fas fa-save"></i> Simpan & Terapkan Nominal
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Verifikasi Bukti Pembayaran Transaksi -->
+    <div class="modal-overlay" id="admin-payment-proof-modal">
+        <div class="modal" style="max-width: 680px; max-height: 92vh; overflow-y: auto;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" style="display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fas fa-file-invoice-dollar" style="color:var(--accent-start);"></i> Verifikasi Bukti Pembayaran
+                    </h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary); margin:0.25rem 0 0 0;">
+                        Periksa kecocokan nominal transfer atau QRIS dengan mutasi rekening sebelum menyetujui pesanan ke antrian cetak.
+                    </p>
+                </div>
+                <button type="button" class="modal-close" onclick="UI.closeModal('admin-payment-proof-modal')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:1.25rem;">
+                <!-- Ringkasan Pesanan & Pelanggan -->
+                <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; margin-bottom:1rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; font-size:0.85rem;">
+                    <div>
+                        <div style="color:var(--text-tertiary); font-size:0.75rem;">ID Pesanan:</div>
+                        <strong id="proof-modal-order-id" style="color:var(--accent-start); font-family:var(--font-mono);">-</strong>
+                    </div>
+                    <div>
+                        <div style="color:var(--text-tertiary); font-size:0.75rem;">Pelanggan:</div>
+                        <strong id="proof-modal-cust-name">-</strong> (<span id="proof-modal-cust-phone">-</span>)
+                    </div>
+                    <div>
+                        <div style="color:var(--text-tertiary); font-size:0.75rem;">Metode / Tipe Bayar:</div>
+                        <span id="proof-modal-payment-method" class="badge badge-new">-</span>
+                    </div>
+                    <div>
+                        <div style="color:var(--text-tertiary); font-size:0.75rem;">Nominal Terbayar / Verifikasi:</div>
+                        <strong id="proof-modal-amount-due" style="color:#10b981; font-size:1.1rem; font-family:var(--font-mono);">-</strong>
+                    </div>
+                </div>
+
+                <!-- Preview Gambar Bukti Bayar / Struk Transfer -->
+                <div style="text-align:center; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; margin-bottom:1rem; min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                    <img id="proof-modal-image" src="" alt="Bukti Transfer" style="max-width:100%; max-height:420px; object-fit:contain; border-radius:var(--radius-sm); border:1px solid rgba(255,255,255,0.1); box-shadow:0 4px 15px rgba(0,0,0,0.5);">
+                    <div id="proof-modal-no-img" style="display:none; color:var(--text-tertiary); font-size:0.9rem;">
+                        <i class="fas fa-image" style="font-size:2.5rem; margin-bottom:0.5rem; display:block; opacity:0.4;"></i>
+                        Belum ada gambar bukti pembayaran yang diunggah
+                    </div>
+                    <div id="proof-modal-timestamp" style="margin-top:0.6rem; font-size:0.75rem; color:var(--text-tertiary);">
+                        <i class="far fa-clock"></i> Diunggah pada: -
+                    </div>
+                </div>
+
+                <!-- Catatan Pelanggan -->
+                <div id="proof-modal-note-box" style="margin-bottom:1.25rem; background:rgba(99,102,241,0.06); border:1px solid rgba(99,102,241,0.2); border-radius:var(--radius-sm); padding:0.6rem 0.8rem; font-size:0.8rem; color:var(--text-secondary);">
+                    <strong>Catatan:</strong> <span id="proof-modal-note">-</span>
+                </div>
+
+                <!-- Action Buttons: Approve (ACC) & Reject -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-top:1px solid var(--border-color); padding-top:1rem;">
+                    <button type="button" class="btn btn-outline" style="color:#ef4444; border-color:#ef4444;" id="btn-proof-modal-reject">
+                        <i class="fas fa-times-circle"></i> Tolak Bukti Bayar
+                    </button>
+                    <div style="display:flex; gap:0.5rem;">
+                        <button type="button" class="btn btn-outline" onclick="UI.closeModal('admin-payment-proof-modal')">Tutup</button>
+                        <button type="button" class="btn btn-success" id="btn-proof-modal-approve" style="font-weight:800; font-size:0.92rem; padding:0.6rem 1.25rem;">
+                            <i class="fas fa-check-circle"></i> Setujui & ACC Pembayaran
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/security.js"></script>
+    <script src="../js/prices-data.js"></script>
+    <script src="../js/images-data.js"></script>
+    <script src="../js/products-data.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/ui.js"></script>
+    <script>
+        // Check admin session
+        function checkAdminAuth() {
+            const session = Security.getActiveSession();
+            if (session && session.role === 'admin') {
+                document.getElementById('admin-login-gate').style.display = 'none';
+                document.getElementById('admin-app').style.display = 'block';
+                const nameDisplay = document.getElementById('admin-name-display');
+                if (nameDisplay && session.name) {
+                    nameDisplay.textContent = session.name;
+                }
+                AdminModule.render();
+            } else {
+                document.getElementById('admin-login-gate').style.display = 'flex';
+                document.getElementById('admin-app').style.display = 'none';
+            }
+        }
+
+        // Quick Auto-Fill Demo Button
+        const quickFillBtn = document.getElementById('btn-quick-fill-admin');
+        if (quickFillBtn) {
+            quickFillBtn.addEventListener('click', () => {
+                document.getElementById('admin-user').value = 'admin';
+                document.getElementById('admin-pass').value = 'admin123';
+                document.getElementById('admin-login-form').dispatchEvent(new Event('submit'));
+            });
+        }
+
+        // Toggle Password Visibility
+        const toggleBtn = document.getElementById('btn-toggle-admin-pass');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const passInput = document.getElementById('admin-pass');
+                const icon = toggleBtn.querySelector('i');
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    icon.className = 'fas fa-eye-slash';
+                } else {
+                    passInput.type = 'password';
+                    icon.className = 'fas fa-eye';
+                }
+            });
+        }
+
+        // Login form
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const alertBox = document.getElementById('admin-login-alert');
+            const submitBtn = document.getElementById('btn-submit-admin');
+            const u = document.getElementById('admin-user').value.trim();
+            const p = document.getElementById('admin-pass').value.trim();
+
+            if (!u || !p) {
+                alertBox.innerHTML = `
+                    <div class="alert alert-error"><i class="fas fa-exclamation-circle"></i> Username dan password wajib diisi!</div>
+                `;
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memverifikasi Kredensial...';
+
+            try {
+                // Try REST API login
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identifier: u, password: p })
+                });
+                const data = await res.json();
+
+                if (data.success && data.user && data.user.role === 'admin') {
+                    Security.setActiveSession(data.user);
+                    checkAdminAuth();
+                    return;
+                }
+            } catch (err) {
+                console.warn('API login error, proceeding to direct check:', err);
+            }
+
+            // Direct validation fallback
+            const cleanUser = u.toLowerCase();
+            if ((cleanUser === 'admin' || cleanUser === 'admin@gilarmedia.com' || cleanUser === '081122334455') && p === 'admin123') {
+                Security.setActiveSession({
+                    id: 'USR-001',
+                    userId: 'USR-001',
+                    role: 'admin',
+                    username: 'admin',
+                    name: 'Bapak Hendra (Master Admin)',
+                    email: 'admin@gilarmedia.com',
+                    phone: '081122334455'
+                });
+                checkAdminAuth();
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk ke Dashboard Admin';
+                alertBox.innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i> Username atau password admin salah!
+                        <div style="margin-top:0.35rem; font-size:0.82rem;">Pastikan menggunakan <strong>admin</strong> dan <strong>admin123</strong>, atau klik tombol kuning di atas.</div>
+                    </div>
+                `;
+            }
+        });
+
+        // Logout
+        document.getElementById('btn-admin-logout').addEventListener('click', () => {
+            Security.clearSession();
+            checkAdminAuth();
+        });
+
+        document.addEventListener('DOMContentLoaded', checkAdminAuth);
+    </script>
+</body>
+</html>

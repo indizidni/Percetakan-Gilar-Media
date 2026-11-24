@@ -1,0 +1,430 @@
+/* ============================================
+   MODAL STYLES — Digital Media
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 17, 30, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 540px;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.95) translateY(15px);
+    transition: transform var(--transition-base);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-lg {
+    max-width: 860px;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-card);
+    position: relative;
+    z-index: 10;
+}
+
+.modal-header h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.modal-header h3 i {
+    color: var(--accent-start);
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
+.modal-body {
+    padding: 1.75rem;
+}
+
+/* ─── Customer Auth Modal (Register & Login) ─── */
+.auth-benefits-box {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.22);
+    border-radius: var(--radius-lg);
+    padding: 0.9rem 1.15rem;
+    margin-bottom: 1.25rem;
+}
+
+.auth-benefits-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 0.45rem;
+}
+
+.auth-benefits-header i {
+    color: var(--accent-start);
+    font-size: 1rem;
+}
+
+.auth-benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.auth-benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.auth-benefits-list li i {
+    color: var(--accent-start);
+    font-size: 0.82rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Auth Tabs Segmented Control */
+.auth-tabs-header {
+    display: flex;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 1.25rem;
+}
+
+.auth-tab-btn {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    border-radius: calc(var(--radius-lg) - 4px);
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.auth-tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-tab-btn.active {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+}
+
+/* Auth Panes (Fix: Hides inactive pane to prevent stacking) */
+.auth-pane {
+    display: none;
+}
+
+.auth-pane.active {
+    display: block;
+    animation: authPaneFade 0.25s ease-out;
+}
+
+@keyframes authPaneFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2-Column Responsive Grid for Registration Form */
+.auth-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 0.85rem;
+}
+
+.auth-form-full {
+    grid-column: 1 / -1;
+}
+
+.auth-form-grid .form-group,
+.auth-pane .form-group {
+    margin-bottom: 0.65rem;
+}
+
+.auth-pane .form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
+.auth-pane .form-group input,
+.auth-pane .form-group textarea {
+    padding: 0.65rem 0.95rem;
+    font-size: 0.88rem;
+}
+
+.auth-switch-prompt {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.84rem;
+    color: var(--text-tertiary);
+}
+
+.auth-switch-prompt a {
+    color: var(--accent-start);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 0.25rem;
+    transition: color var(--transition-fast);
+}
+
+.auth-switch-prompt a:hover {
+    color: var(--accent-start);
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .auth-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+/* Success Modal */
+.success-modal {
+    text-align: center;
+    padding: 2.25rem;
+    max-width: 520px;
+}
+
+.success-checkmark {
+    font-size: 4rem;
+    color: var(--success);
+    animation: successPop 0.5s ease;
+    margin-bottom: 1rem;
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.order-id-badge {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--accent-start);
+    margin: 1.25rem 0;
+}
+
+/* QRIS Canvas Box */
+.qris-box {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    display: inline-block;
+    border: 2px solid var(--border-color);
+    margin: 1rem 0;
+}
+
+.qris-box canvas {
+    width: 200px !important;
+    height: 200px !important;
+    display: block;
+}
+
+/* Bank & E-Wallet Lists */
+.bank-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.bank-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.25rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.bank-info-item strong {
+    font-size: 0.95rem;
+}
+
+.bank-info-item .acc-num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Toasts */
+.toast-container {
+    position: fixed;
+    top: 85px;
+    right: 1.5rem;
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.95rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    min-width: 320px;
+    animation: slideInRight 0.3s ease;
+    transition: all var(--transition-base);
+}
+
+.toast.removing {
+    animation: slideOutRight 0.3s ease forwards;
+}
+
+.toast-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.toast.success .toast-icon {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.toast.error .toast-icon {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.toast.warning .toast-icon {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.toast.info .toast-icon {
+    background: var(--info-bg);
+    color: var(--accent-start);
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.toast-message {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    font-size: 0.9rem;
+}

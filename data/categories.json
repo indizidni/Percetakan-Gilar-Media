@@ -1,0 +1,32 @@
+[
+  {
+    "id": "spanduk",
+    "name": "Spanduk & X-Banner",
+    "icon": "fas fa-scroll"
+  },
+  {
+    "id": "stiker",
+    "name": "Stiker Kromo",
+    "icon": "fas fa-tags"
+  },
+  {
+    "id": "dokumen",
+    "name": "Kartu Nama, Brosur & Foto",
+    "icon": "fas fa-newspaper"
+  },
+  {
+    "id": "buku",
+    "name": "Undangan, Kalender, Nota & Yasin",
+    "icon": "fas fa-book-open"
+  },
+  {
+    "id": "kemasan",
+    "name": "Box Nasi Kemasan",
+    "icon": "fas fa-box-open"
+  },
+  {
+    "id": "jasa",
+    "name": "Jasa Desain & Potong Kertas",
+    "icon": "fas fa-crop-alt"
+  }
+]

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; script-src 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>Percetakan Gilar Media — Solusi Cetak Digital Modern</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS Modules (Terpisah Bersih Tanpa Bundling) -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/customer.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- ============================================
+         TOP NAVBAR — Pelanggan & Storefront
+         ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Brand Logo -->
+            <a href="/" class="nav-logo">
+                <div class="logo-badge-cmyk">
+                    <i class="fas fa-print"></i>
+                </div>
+                <span>GILAR <strong>MEDIA</strong></span>
+            </a>
+
+            <!-- Store Dual Engine Status -->
+            <div class="store-mode-pill">
+                <span class="pulse-dot"></span>
+                <span>TOKO OFFLINE & ONLINE BUKA</span>
+            </div>
+
+            <!-- Customer Navigation Links -->
+            <div class="nav-menu-links" style="display:flex; gap:1.5rem; align-items:center;">
+                <a href="#cust-catalog" style="font-weight:600; font-size:0.92rem; color:var(--text-primary);"><i
+                        class="fas fa-layer-group"></i> Layanan Cetak</a>
+                <a href="#keunggulan-section" style="font-weight:600; font-size:0.92rem; color:var(--text-primary);"><i
+                        class="fas fa-award"></i> Keunggulan</a>
+                <a href="#order-tracking-section"
+                    style="font-weight:600; font-size:0.92rem; color:var(--text-primary);"><i
+                        class="fas fa-search-location"></i> Lacak Pesanan</a>
+                <a href="#lokasi-toko" style="font-weight:600; font-size:0.92rem; color:var(--text-primary);"><i
+                        class="fas fa-map-marker-alt"></i> Lokasi Toko</a>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button type="button" class="nav-btn" id="theme-toggle" aria-label="Ganti Tema Gelap / Terang">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <!-- Customer Cart -->
+                <button type="button" class="nav-btn" id="cart-toggle" aria-label="Keranjang Pesanan">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count cust-cart-count">0</span>
+                </button>
+
+                <!-- Customer Account Area (Dynamically Rendered by js/auth.js) -->
+                <div id="user-nav-action-area">
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-open-login-modal">
+                        <i class="fas fa-user-circle"></i> Masuk / Daftar Akun
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ============================================
+         MAIN STOREFRONT (PORTAL PELANGGAN)
+         ============================================ -->
+    <main id="panel-customer">
+        <!-- Hero Section (Modern Split Layout) -->
+        <section class="customer-hero">
+            <div class="container hero-container-split">
+                <!-- Left Column: Value Proposition & CTAs -->
+                <div class="customer-hero-content">
+                    <div class="hero-tag-badge">
+                        <i class="fas fa-print"></i> Percetakan Gilar Media — Solusi Cetak Digital Modern
+                    </div>
+                    <h1>Cetak Spanduk, Stiker & Merchandise <span class="gradient-text">Mudah, Cepat & Presisi</span>
+                    </h1>
+                    <p>Percetakan Gilar Media melayani pemesanan cetak digital online dan offline langsung dari workshop kami.
+                        Didukung proses pemesanan praktis, gratis konsultasi file, cetak kilat 1-2 jam jadi, serta
+                        jaminan kualitas warna tajam CMYK presisi.</p>
+
+                    <div class="hero-features-list">
+                        <div class="hero-feat-item">
+                            <i class="fas fa-bolt"></i> 1-2 Jam Jadi (Bisa Ditunggu)
+                        </div>
+                        <div class="hero-feat-item">
+                            <i class="fas fa-eye"></i> Kualitas CMYK 1440 DPI
+                        </div>
+                        <div class="hero-feat-item">
+                            <i class="fas fa-certificate"></i> Garansi Presisi & Rapi
+                        </div>
+                        <div class="hero-feat-item">
+                            <i class="fas fa-store"></i> Toko Fisik & Online
+                        </div>
+                    </div>
+
+                    <div class="hero-cta-group" style="display:flex; gap:1rem; flex-wrap:wrap;">
+                        <a href="#cust-catalog" class="btn btn-primary btn-lg">
+                            <i class="fas fa-layer-group"></i> Mulai Pesan Cetak Sekarang
+                        </a>
+                        <a href="#order-tracking-section" class="btn btn-outline btn-lg" id="btn-hero-track">
+                            <i class="fas fa-search-location"></i> Lacak Status Pesanan
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Bento Grid Showcase -->
+                <div class="hero-bento-grid">
+                    <!-- Bento Tile 1: Layanan Unggulan Percetakan Gilar Media -->
+                    <div class="bento-card" style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:1.5rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem;">
+                        <div class="bento-header" style="display:flex; justify-content:space-between; align-items:center;">
+                            <strong style="font-size:1.05rem; display:flex; align-items:center; gap:0.5rem; color:var(--text-primary);">
+                                <i class="fas fa-layer-group" style="color:var(--accent-start)"></i> Layanan Percetakan Modern
+                            </strong>
+                            <span class="badge" style="background:rgba(139,92,246,0.15); color:var(--accent-start); border:1px solid rgba(139,92,246,0.3); font-size:0.7rem; font-weight:800; padding:3px 8px; border-radius:4px;">PRODUKSI CEPAT</span>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem; font-size:0.85rem;">
+                                <div style="color:var(--accent-start); font-weight:800; margin-bottom:2px;"><i class="fas fa-scroll"></i> Spanduk & Banner</div>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">Flexi standar & Korea tebal</span>
+                            </div>
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem; font-size:0.85rem;">
+                                <div style="color:var(--accent-end); font-weight:800; margin-bottom:2px;"><i class="fas fa-tags"></i> Stiker & Label</div>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">Vinil & kromo siap potong</span>
+                            </div>
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem; font-size:0.85rem;">
+                                <div style="color:var(--success); font-weight:800; margin-bottom:2px;"><i class="fas fa-id-card"></i> Kartu & Brosur</div>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">Art Paper laminasi doff/gloss</span>
+                            </div>
+                            <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:0.75rem; font-size:0.85rem;">
+                                <div style="color:#0891b2; font-weight:800; margin-bottom:2px;"><i class="fas fa-tshirt"></i> Sablon DTF & Kaos</div>
+                                <span style="font-size:0.75rem; color:var(--text-secondary);">Full color tanpa minimal order</span>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:0.75rem;">
+                            <div>
+                                <span style="font-size:0.75rem; color:var(--text-tertiary); display:block;">Pemesanan Online 24 Jam</span>
+                                <strong style="font-size:0.88rem; color:var(--text-primary);"><i class="fas fa-check-circle" style="color:var(--success)"></i> Siap Kirim / Ambil di Toko</strong>
+                            </div>
+                            <a href="#cust-catalog" class="btn btn-sm btn-primary" style="padding:0.45rem 1rem; font-size:0.82rem; font-weight:800;">
+                                <i class="fas fa-cart-plus"></i> Pesan Sekarang
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Bento Subgrid: Preflight & Machine Status -->
+                    <div class="bento-subgrid">
+                        <div class="bento-mini-card" id="hero-preflight-box" style="cursor:pointer;"
+                            title="Klik untuk cek file desain Anda">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <i class="fas fa-cloud-upload-alt"
+                                    style="color:var(--accent-start); font-size:1.1rem;"></i>
+                                <strong style="font-size:0.85rem; color:var(--text-primary);">Cek File Gratis</strong>
+                            </div>
+                            <span style="font-size:0.75rem; color:var(--text-secondary);">Format PDF, TIFF, CDR,
+                                PNG</span>
+                            <span class="badge badge-new" style="font-size:0.68rem; align-self:flex-start;">Free
+                                Preflight Check</span>
+                        </div>
+
+                        <div class="bento-mini-card">
+                            <div style="display:flex; align-items:center; gap:0.45rem;">
+                                <span class="pulse-dot"
+                                    style="background:#10b981; width:7px; height:7px; border-radius:50%; box-shadow:0 0 8px #10b981;"></span>
+                                <strong style="font-size:0.85rem; color:var(--text-primary);">4 Mesin Online</strong>
+                            </div>
+                            <span style="font-size:0.75rem; color:var(--text-secondary);">CMYK High-Res 1440 DPI</span>
+                            <span style="font-size:0.72rem; color:var(--accent-start); font-weight:700;"><i
+                                    class="fas fa-shield-alt"></i> Garansi Warna Tajam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modern Sleek Trust Ribbon (Menggantikan 4 slab putih raksasa) -->
+        <section class="trust-bar-section" id="keunggulan-section">
+            <div class="container">
+                <div class="trust-bar-grid">
+                    <div class="trust-bar-item">
+                        <div class="trust-bar-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="trust-bar-text">
+                            <strong>1-2 Jam Selesai</strong>
+                            <span>Cetak kilat siap ditunggu di outlet</span>
+                        </div>
+                    </div>
+                    <div class="trust-bar-item">
+                        <div class="trust-bar-icon"><i class="fas fa-eye"></i></div>
+                        <div class="trust-bar-text">
+                            <strong>Warna Tajam CMYK</strong>
+                            <span>Mesin resolusi 1440 DPI presisi</span>
+                        </div>
+                    </div>
+                    <div class="trust-bar-item">
+                        <div class="trust-bar-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="trust-bar-text">
+                            <strong>Garansi Presisi</strong>
+                            <span>Hasil rapi sesuai standar industri cetak</span>
+                        </div>
+                    </div>
+                    <div class="trust-bar-item">
+                        <div class="trust-bar-icon"><i class="fas fa-qrcode"></i></div>
+                        <div class="trust-bar-text">
+                            <strong>QRIS & Multi-Bank</strong>
+                            <span>Scan QRIS cepat atau tunai di kasir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works: 3 Langkah Mudah Pesan Cetak -->
+        <section class="container" style="padding-top: 1.5rem; padding-bottom: 0.5rem;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2rem 2.25rem; box-shadow: var(--shadow-md);">
+                <div style="text-align: center; max-width: 650px; margin: 0 auto 1.75rem;">
+                    <span class="hero-tag-badge" style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> PANDUAN PRAKTIS</span>
+                    <h3 style="font-size: 1.65rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.4rem;">
+                        Cara Pesan Cetak dalam <span style="background: var(--gradient-royal); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">3 Langkah Cepat</span>
+                    </h3>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary); margin: 0;">Proses pemesanan digital tanpa ribet, langsung masuk antrian produksi mesin kami</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(139, 92, 246, 0.15); color: var(--accent-start); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 900; flex-shrink: 0; border: 1px solid rgba(139, 92, 246, 0.3);">
+                            1
+                        </div>
+                        <div>
+                            <strong style="display: block; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.3rem;">Pilih Produk & Qty</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; display: block;">Tentukan jenis cetak (spanduk, stiker, kartu nama, dll.), jumlah pesanan, dan pilihan finishing.</span>
+                        </div>
+                    </div>
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); color: var(--accent-end); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 900; flex-shrink: 0; border: 1px solid rgba(245, 158, 11, 0.3);">
+                            2
+                        </div>
+                        <div>
+                            <strong style="display: block; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.3rem;">Upload Desain Siap Cetak</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; display: block;">Unggah file desain (PDF / TIFF / PNG / JPG) atau konsultasikan desain via WhatsApp resmi.</span>
+                        </div>
+                    </div>
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 900; flex-shrink: 0; border: 1px solid rgba(16, 185, 129, 0.3);">
+                            3
+                        </div>
+                        <div>
+                            <strong style="display: block; font-size: 1rem; color: var(--text-primary); margin-bottom: 0.3rem;">Bayar & Ambil Cetakan</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; display: block;">Selesaikan pembayaran melalui QRIS, Transfer, atau Kasir Toko. Pantau status hingga cetakan selesai.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section class="container" id="cust-catalog" style="padding-top: 2.5rem; padding-bottom: 3.5rem;">
+            <div class="section-header" style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
+                <span class="hero-tag-badge" style="margin-bottom:0.75rem;"><i class="fas fa-layer-group"></i> KATALOG
+                    PERCETAKAN GILAR MEDIA</span>
+                <h2 style="font-size:2.2rem; font-weight:900; letter-spacing:-0.5px;">Layanan Percetakan Digital Lengkap
+                </h2>
+                <p style="color:var(--text-secondary); margin-top:0.35rem; font-size:1.02rem;">Pilih produk di bawah ini untuk melihat spesifikasi, opsi finishing, dan langsung memesan secara online</p>
+            </div>
+
+            <!-- Control Bar (Search + Categories) -->
+            <div class="catalog-control-bar">
+                <div class="catalog-search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="cust-search-input"
+                        placeholder="Cari layanan (Spanduk, Stiker, Kartu Nama, Brosur, Kaos...)">
+                </div>
+                <div class="cust-categories-grid" id="cust-categories-grid"></div>
+            </div>
+
+            <!-- Product / Service Grid -->
+            <div class="printing-grid" id="cust-products-grid"></div>
+
+            <!-- Order Tracking Section -->
+            <div class="tracker-section" id="order-tracking-section">
+                <div style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem;">
+                    <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem;">
+                        <i class="fas fa-search-location" style="color:var(--accent-start);"></i> Lacak Proses Produksi
+                        Pesanan
+                    </h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">
+                        Pantau pesanan Anda secara langsung dari antrian mesin cetak hingga siap diambil:
+                    </p>
+                </div>
+                <div style="max-width: 480px; margin: 0 auto; display: flex; gap: 0.5rem;">
+                    <input type="text" id="tracker-order-id"
+                        placeholder="Masukkan Nomor ID Pesanan (Contoh: DM-ONL-XXXX)"
+                        style="flex: 1; padding: 0.8rem 1rem; border: 2px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-mono); font-weight: 700;">
+                    <button type="button" class="btn btn-primary" id="btn-track-order">
+                        <i class="fas fa-search"></i> Lacak
+                    </button>
+                </div>
+                <div id="tracker-result-box" style="margin-top: 1.5rem;"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- ============================================
+         MODALS (PELANGGAN)
+         ============================================ -->
+
+    <!-- Customer Cart Drawer Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Keranjang Pesanan Cetak</h3>
+            <button class="cart-close" id="cart-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cust-cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Biaya Cetak:</span>
+                <span class="total-price" id="cust-cart-total">Rp 0</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" id="checkout-btn">
+                <i class="fas fa-credit-card"></i> Lanjut ke Pembayaran
+            </button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Mandatory Customer Registration & Login Modal -->
+    <div class="modal-overlay" id="customer-auth-modal">
+        <div class="modal" style="max-width: 540px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> Akun Pelanggan Percetakan Gilar Media</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-benefits-box">
+                    <div class="auth-benefits-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Akun Diperlukan untuk Pemesanan & Cetak</span>
+                    </div>
+                    <ul class="auth-benefits-list">
+                        <li><i class="fas fa-check-circle"></i><span>Simpan riwayat & nota transaksi cetak secara
+                                permanen</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Upload berkas desain siap cetak (PDF, TIFF, CDR,
+                                PNG)</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>Pantau antrian & status pengerjaan mesin secara
+                                real-time</span></li>
+                    </ul>
+                </div>
+
+                <!-- Quick 1-Click Customer Demo Login Button -->
+                <button type="button" class="btn btn-outline btn-block" id="btn-quick-customer-demo" style="border-color:#6366f1; color:#818cf8; margin-bottom:1rem; font-weight:800; font-size:0.86rem; background:rgba(99,102,241,0.08); padding:0.65rem;">
+                    <i class="fas fa-bolt"></i> ⚡ 1-Klik Masuk Akun Pelanggan Demo (Untuk Uji Coba)
+                </button>
+
+                <!-- Tab Headers (Segmented Control) -->
+                <div class="auth-tabs-header">
+                    <button type="button" class="auth-tab-btn active" data-auth-tab="register">
+                        <i class="fas fa-user-plus"></i> Buat Akun Baru
+                    </button>
+                    <button type="button" class="auth-tab-btn" data-auth-tab="login">
+                        <i class="fas fa-sign-in-alt"></i> Masuk Akun
+                    </button>
+                </div>
+
+                <!-- Tab 1: Register Form -->
+                <div class="auth-pane active" id="auth-pane-register">
+                    <form id="customer-register-form">
+                        <div class="auth-form-grid">
+                            <div class="form-group">
+                                <label for="reg-name">Nama Lengkap Pemesan <span class="required">*</span></label>
+                                <input type="text" id="reg-name" required placeholder="Contoh: Budi Pratama">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-phone">Nomor WhatsApp Aktif <span class="required">*</span></label>
+                                <input type="tel" id="reg-phone" required placeholder="08xxxxxxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-email">Alamat Email <span
+                                        style="color:var(--text-tertiary); font-weight:400;">(Opsional)</span></label>
+                                <input type="email" id="reg-email" placeholder="nama@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-password">Kata Sandi Akun <span class="required">*</span></label>
+                                <input type="password" id="reg-password" required minlength="4"
+                                    placeholder="Minimal 4 karakter">
+                            </div>
+                            <div class="form-group auth-form-full">
+                                <label for="reg-address">Alamat Pengiriman / Domisili <span
+                                        class="required">*</span></label>
+                                <textarea id="reg-address" rows="2" required
+                                    placeholder="Masukkan alamat lengkap pengiriman hasil cetak"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.75rem;">
+                            <i class="fas fa-user-plus"></i> Buat Akun & Lanjutkan Belanja
+                        </button>
+                        <div class="auth-switch-prompt">
+                            Sudah memiliki akun? <a href="#" data-switch-auth-tab="login">Masuk Akun di sini</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tab 2: Login Form -->
+                <div class="auth-pane" id="auth-pane-login">
+                    <form id="customer-login-form">
+                        <div class="form-group">
+                            <label for="log-identifier">Nomor WhatsApp / Email / Username <span
+                                    class="required">*</span></label>
+                            <input type="text" id="log-identifier" required
+                                placeholder="Masukkan No. WA atau Email terdaftar">
+                        </div>
+                        <div class="form-group">
+                            <label for="log-password">Kata Sandi <span class="required">*</span></label>
+                            <input type="password" id="log-password" required placeholder="Masukkan kata sandi akun">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:1rem;">
+                            <i class="fas fa-sign-in-alt"></i> Masuk Akun
+                        </button>
+                        <div class="auth-switch-prompt">
+                            Belum memiliki akun? <a href="#" data-switch-auth-tab="register">Daftar Akun Baru</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Calculator Modal (Banner / Custom Print) -->
+    <div class="modal-overlay" id="service-calc-modal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3><i class="fas fa-calculator"></i> Spesifikasi & Kalkulator Biaya Cetak</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="service-calc-content"></div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal checkout-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-credit-card"></i> Checkout Pemesanan Online</h3>
+                <button type="button" class="modal-close" id="checkout-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="checkout-form" novalidate>
+                    <input type="hidden" id="csrf-token" name="csrf_token" value="">
+
+                    <!-- Step 1: Customer Data -->
+                    <div class="checkout-step" id="step-1">
+                        <h4><i class="fas fa-user"></i> Data Pemesan & Pengambilan</h4>
+
+                        <div class="form-group">
+                            <label for="customer-name">Nama Lengkap Pemesan <span class="required">*</span></label>
+                            <input type="text" id="customer-name" required maxlength="100"
+                                placeholder="Masukkan nama Anda">
+                            <span class="form-error" id="name-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer-phone">Nomor WhatsApp Aktif <span class="required">*</span></label>
+                            <input type="tel" id="customer-phone" required maxlength="15" placeholder="08xxxxxxxxxx">
+                            <span class="form-error" id="phone-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery-method">Metode Pengambilan Pesanan</label>
+                            <select id="delivery-method"
+                                style="width:100%; padding:0.75rem; border:2px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-weight:600;">
+                                <option value="pickup">Ambil Langsung di Workshop Percetakan Gilar Media (Gratis)</option>
+                                <option value="delivery">Kirim ke Alamat Rumah / Kantor via Kurir</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer-address">Alamat Lengkap / Catatan Pengambilan <span
+                                    class="required">*</span></label>
+                            <textarea id="customer-address" rows="2"
+                                placeholder="Tulis alamat atau waktu perkiraan ambil"></textarea>
+                            <span class="form-error" id="address-error"></span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-block" id="to-step-2">
+                            Lanjut ke Metode Pembayaran <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Step 2: Payment Method -->
+                    <div class="checkout-step hidden" id="step-2">
+                        <h4><i class="fas fa-wallet"></i> Pilih Metode & Skema Pembayaran</h4>
+
+                        <!-- Down Payment (DP 50%) Option Selector for Orders >= Rp 100.000 -->
+                        <div id="checkout-payment-type-box"
+                            style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:1rem 1.15rem; margin-bottom:1.25rem;">
+                            <div
+                                style="font-size:0.88rem; font-weight:800; color:var(--text-primary); margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+                                <i class="fas fa-hand-holding-usd" style="color:var(--accent-start);"></i> Skema
+                                Pembayaran Pesanan
+                            </div>
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;"
+                                id="checkout-pay-type-grid">
+                                <label
+                                    style="display:flex; align-items:flex-start; gap:0.6rem; background:var(--bg-card); border:1.5px solid var(--border-color); padding:0.75rem; border-radius:var(--radius-md); cursor:pointer;">
+                                    <input type="radio" name="paymentType" value="full" checked
+                                        style="margin-top:0.25rem;">
+                                    <div>
+                                        <strong
+                                            style="display:block; font-size:0.85rem; color:var(--text-primary);">Bayar
+                                            Lunas (100%)</strong>
+                                        <span style="font-size:0.75rem; color:var(--text-secondary);"
+                                            id="label-pay-full-desc">Bayar penuh lunas sekaligus</span>
+                                    </div>
+                                </label>
+                                <label id="label-pay-dp-wrap"
+                                    style="display:flex; align-items:flex-start; gap:0.6rem; background:var(--bg-card); border:1.5px solid var(--border-color); padding:0.75rem; border-radius:var(--radius-md); cursor:pointer;">
+                                    <input type="radio" name="paymentType" value="dp" style="margin-top:0.25rem;">
+                                    <div>
+                                        <strong style="display:block; font-size:0.85rem; color:var(--text-primary);">
+                                            Uang Muka (DP 50%) <span class="badge badge-sale"
+                                                style="font-size:0.68rem; padding:1px 5px;">PESANAN BESAR</span>
+                                        </strong>
+                                        <span style="font-size:0.75rem; color:var(--text-secondary);"
+                                            id="label-pay-dp-desc">50% di awal, sisa saat ambil</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="qris" checked>
+                                <div class="payment-card">
+                                    <i class="fas fa-qrcode"></i>
+                                    <div>
+                                        <strong>QRIS Digital Otomatis</strong>
+                                        <span>Scan QR dari Gopay, OVO, DANA, BCA Mobile, dll</span>
+                                    </div>
+                                    <span class="payment-badge">REKOMENDASI</span>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="transfer">
+                                <div class="payment-card">
+                                    <i class="fas fa-university"></i>
+                                    <div>
+                                        <strong>Transfer Bank Virtual</strong>
+                                        <span>BCA & BNI (Konfirmasi Otomatis)</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="ewallet">
+                                <div class="payment-card">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <div>
+                                        <strong>E-Wallet Saldo</strong>
+                                        <span>DANA / OVO / GoPay</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod">
+                                <div class="payment-card">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <div>
+                                        <strong>COD (Bayar Tunai)</strong>
+                                        <span>Bayar tunai di kasir saat mengambil hasil cetak</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <span class="form-error" id="payment-error"></span>
+
+                        <div class="checkout-nav">
+                            <button type="button" class="btn btn-outline" id="back-step-1">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </button>
+                            <button type="button" class="btn btn-primary" id="to-step-3">
+                                Tinjau Pesanan <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirmation -->
+                    <div class="checkout-step hidden" id="step-3">
+                        <h4><i class="fas fa-clipboard-check"></i> Konfirmasi Pesanan Akhir</h4>
+                        <div class="order-summary" id="order-summary"></div>
+                        <div class="checkout-nav">
+                            <button type="button" class="btn btn-outline" id="back-step-2">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </button>
+                            <button type="submit" class="btn btn-success btn-lg" id="place-order-btn">
+                                <i class="fas fa-check-circle"></i> Konfirmasi Pesanan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal (Payment Instructions) -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal success-modal">
+            <div class="success-checkmark"><i class="fas fa-check-circle"></i></div>
+            <h3 style="font-size:1.5rem; font-weight:800;">Pesanan Cetak Berhasil Diterima!</h3>
+            <p style="color:var(--text-secondary); margin-top:0.25rem;">Pesanan Anda telah otomatis diteruskan ke
+                antrian mesin produksi kami.</p>
+
+            <div class="order-id-badge" id="order-id"></div>
+
+            <!-- QRIS Payment View -->
+            <div class="qris-box hidden" id="qris-payment-section">
+                <img id="qris-img-custom" src="" alt="QRIS Resmi Toko" style="display:none; max-width:220px; max-height:220px; object-fit:contain; border-radius:12px; margin:0 auto; border:2px solid var(--accent-start); box-shadow:0 4px 15px rgba(0,0,0,0.3);">
+                <canvas id="qris-canvas"></canvas>
+                <p style="font-size:0.85rem; color:#475569; margin-top:0.5rem; font-weight:600;">
+                    Scan QRIS di atas dengan aplikasi mobile banking (BCA, Mandiri, BRI, dll) atau e-wallet Anda
+                </p>
+            </div>
+
+            <!-- Bank Transfer View -->
+            <div class="hidden" id="transfer-payment-section" style="margin: 1rem 0;">
+                <h4 style="font-size:0.95rem; margin-bottom:0.5rem;">Nomor Rekening Pembayaran Toko:</h4>
+                <div class="bank-info-list">
+                    <div class="bank-info-item">
+                        <strong>Bank BCA</strong>
+                        <span class="acc-num" id="pay-bca-acc">7829-1029-38</span>
+                        <button type="button" class="btn btn-sm btn-outline btn-copy" id="btn-copy-bca" data-copy="7829102938"><i
+                                class="fas fa-copy"></i> Salin</button>
+                    </div>
+                    <div class="bank-info-item">
+                        <strong>Bank BNI</strong>
+                        <span class="acc-num" id="pay-bni-acc">0928-3746-12</span>
+                        <button type="button" class="btn btn-sm btn-outline btn-copy" id="btn-copy-bni" data-copy="0928374612"><i
+                                class="fas fa-copy"></i> Salin</button>
+                    </div>
+                    <div class="bank-info-item">
+                        <strong>Bank Mandiri</strong>
+                        <span class="acc-num" id="pay-mandiri-acc">137-00-1928374-1</span>
+                        <button type="button" class="btn btn-sm btn-outline btn-copy" id="btn-copy-mandiri" data-copy="1370019283741"><i
+                                class="fas fa-copy"></i> Salin</button>
+                    </div>
+                </div>
+                <small style="color:var(--text-secondary);">a.n. <strong id="pay-holder-name">CV. GILAR MEDIA PRINTING</strong></small>
+            </div>
+
+            <!-- E-Wallet View -->
+            <div class="hidden" id="ewallet-payment-section" style="margin: 1rem 0;">
+                <h4 style="font-size:0.95rem; margin-bottom:0.5rem;">Transfer Saldo E-Wallet:</h4>
+                <div class="bank-info-list">
+                    <div class="bank-info-item">
+                        <strong id="pay-ewallet-provider">DANA / GoPay / OVO</strong>
+                        <span class="acc-num" id="pay-ewallet-acc">0812-3456-7890</span>
+                        <button type="button" class="btn btn-sm btn-outline btn-copy" id="btn-copy-ewallet" data-copy="081234567890"><i
+                                class="fas fa-copy"></i> Salin</button>
+                    </div>
+                </div>
+                <small style="color:var(--text-secondary);">a.n. <strong id="pay-ewallet-holder">Percetakan Gilar Media (Kasir)</strong></small>
+            </div>
+
+            <!-- COD View -->
+            <div class="hidden" id="cod-payment-section">
+                <div class="alert alert-info" style="text-align: left; margin: 1rem 0;">
+                    <i class="fas fa-store"></i>
+                    <span>Silakan datang ke workshop Percetakan Gilar Media. Anda dapat membayar secara tunai / cash di loket kasir saat mengambil hasil cetak.</span>
+                </div>
+            </div>
+
+            <!-- Upload Bukti Pembayaran / Struk Transfer Section -->
+            <div id="payment-proof-upload-box" style="margin: 1.25rem 0; padding: 1rem; background: var(--bg-secondary); border: 1.5px dashed var(--accent-start); border-radius: var(--radius-lg); text-align: left;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+                    <div style="font-size:0.9rem; font-weight:800; color:var(--text-primary); display:flex; align-items:center; gap:0.4rem;">
+                        <i class="fas fa-file-invoice-dollar" style="color:var(--accent-start);"></i> Konfirmasi & Unggah Bukti Bayar
+                    </div>
+                    <span id="proof-status-pill" class="badge" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid #f59e0b; font-size:0.75rem;">
+                        <i class="fas fa-clock"></i> Belum Konfirmasi
+                    </span>
+                </div>
+                <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.75rem; line-height:1.4;">
+                    Sudah melakukan transfer / scan QRIS? Lampirkan bukti pembayaran agar pesanan Anda dapat diverifikasi toko dan langsung dicetak.
+                </p>
+
+                <!-- Input File & Demo Action Buttons -->
+                <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap;">
+                    <input type="file" id="input-payment-proof-file" accept="image/*" style="display:none;">
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-browse-payment-proof" style="font-size:0.8rem; font-weight:700;">
+                        <i class="fas fa-upload"></i> Pilih Foto Struk / Screenshot
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-demo-sim-proof" style="font-size:0.8rem; font-weight:700; border-color:#6366f1; color:#818cf8;" title="Otomatis memasang struk transfer m-BCA contoh untuk kemudahan demo sidang skripsi">
+                        <i class="fas fa-bolt"></i> ⚡ Pasang Contoh Struk (Demo Sidang)
+                    </button>
+                </div>
+
+                <!-- Preview Box -->
+                <div id="proof-preview-container" style="display:none; margin-bottom:0.75rem; padding:0.6rem; background:var(--bg-card); border-radius:var(--radius-md); border:1px solid var(--border-color);">
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <img id="proof-preview-img" src="" alt="Bukti Transfer" style="width:55px; height:55px; object-fit:cover; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+                        <div style="flex:1; overflow:hidden;">
+                            <div id="proof-preview-name" style="font-size:0.8rem; font-weight:700; color:var(--text-primary); text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">struk-transfer.jpg</div>
+                            <div style="font-size:0.72rem; color:var(--success);"><i class="fas fa-check"></i> Siap dikirim ke kasir / admin toko</div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline" id="btn-remove-proof" style="color:#ef4444; border-color:#ef4444; padding:0.3rem 0.5rem;"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success btn-block" id="btn-submit-payment-proof" style="font-weight:800; font-size:0.88rem;">
+                    <i class="fas fa-paper-plane"></i> Kirim Bukti Pembayaran Sekarang
+                </button>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block" id="close-success">
+                <i class="fas fa-search-location"></i> Pantau Status Produksi
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4><i class="fas fa-print" style="color:var(--accent-start);"></i> PERCETAKAN GILAR MEDIA</h4>
+                    <p>Solusi Percetakan Digital, Offset, Sablon Modern & Advertising Berkualitas. Melayani kebutuhan retail, promosi usaha, dan korporasi.</p>
+                </div>
+                <div class="footer-col" id="lokasi-toko">
+                    <h4>Lokasi Workshop & Toko</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Percetakan Utama No. 88, Jakarta</p>
+                    <p><i class="fas fa-phone-alt"></i> (021) 555-8899</p>
+                    <p><i class="fab fa-whatsapp"></i> 0812-3456-7890</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Jam Operasional</h4>
+                    <p>Senin - Sabtu: 08:00 - 22:00 WIB</p>
+                    <p>Minggu: 09:00 - 18:00 WIB</p>
+                    <p style="color:var(--success); font-weight:700;"><i class="fas fa-clock"></i> Toko Online Buka 24 Jam</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan Unggulan</h4>
+                    <div style="display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-secondary);">
+                        <span><i class="fas fa-check" style="color:var(--accent-start);"></i> Spanduk & Banner Flexi</span>
+                        <span><i class="fas fa-check" style="color:var(--accent-start);"></i> Stiker Label Vinil & Kromo</span>
+                        <span><i class="fas fa-check" style="color:var(--accent-start);"></i> Kartu Nama & Brosur Promosi</span>
+                        <span><i class="fas fa-check" style="color:var(--accent-start);"></i> Sablon DTF & Kaos Custom</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>Percetakan Gilar Media</strong> — Solusi Percetakan Digital Modern.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Terpisah & Modular Tanpa Bundling) -->
+    <script src="js/security.js"></script>
+    <script src="js/prices-data.js"></script>
+    <script src="js/images-data.js"></script>
+    <script src="js/products-data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/customer.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+
+</html>

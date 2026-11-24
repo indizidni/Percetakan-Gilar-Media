@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <title>Portal Kasir & Operator Mesin — Percetakan Gilar Media</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/cashier.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body style="background: var(--bg-primary);">
+
+    <!-- ============================================
+         KASIR LOGIN GATE (JIKA BELUM LOGIN)
+         ============================================ -->
+    <div id="cashier-login-gate" class="auth-gate-wrapper">
+        <div class="auth-gate-card">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div class="logo-badge-cmyk"
+                    style="margin:0 auto 1.25rem; width:56px; height:56px; font-size:1.6rem; background:linear-gradient(135deg,#f59e0b,#d97706); box-shadow:0 8px 25px rgba(245,158,11,0.35);">
+                    <i class="fas fa-cash-register"></i>
+                </div>
+                <h2 style="font-size:1.6rem; font-weight:800; letter-spacing:-0.5px;">Portal Kasir & Operator</h2>
+                <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.35rem;">Khusus staf kasir offline
+                    & operator mesin Percetakan Gilar Media</p>
+            </div>
+
+            <!-- Quick Auto-Fill Demo Button -->
+            <button type="button" class="quick-demo-pill" id="btn-quick-fill-kasir"
+                style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.4); color:#d97706;"
+                title="Klik untuk langsung mengisi username dan password kasir">
+                <i class="fas fa-bolt" style="color:#f59e0b;"></i>
+                <span>Klik untuk Isi Otomatis & Masuk: <strong>kasir</strong> / <strong>kasir123</strong></span>
+            </button>
+
+            <div id="cashier-login-alert" style="margin-bottom:1rem;"></div>
+
+            <form id="cashier-login-form">
+                <div class="form-group">
+                    <label for="kasir-user">Username Kasir</label>
+                    <div style="position:relative;">
+                        <input type="text" id="kasir-user" required placeholder="kasir atau 081299887766"
+                            style="padding-left:2.5rem;" autocomplete="username">
+                        <i class="fas fa-user"
+                            style="position:absolute; left:0.95rem; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:0.95rem;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="kasir-pass">Kata Sandi</label>
+                    <div class="input-password-wrap" style="position:relative;">
+                        <input type="password" id="kasir-pass" required placeholder="Masukkan kata sandi kasir"
+                            style="padding-left:2.5rem; padding-right:2.85rem;" autocomplete="current-password">
+                        <i class="fas fa-lock"
+                            style="position:absolute; left:0.95rem; top:50%; transform:translateY(-50%); color:var(--text-tertiary); font-size:0.95rem;"></i>
+                        <button type="button" class="btn-toggle-password" id="btn-toggle-kasir-pass"
+                            aria-label="Tampilkan / Sembunyikan Kata Sandi">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-submit-kasir"
+                    style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; margin-top:1.25rem; font-weight:800; box-shadow:0 8px 20px rgba(245,158,11,0.3);">
+                    <i class="fas fa-sign-in-alt"></i> Masuk Sistem Kasir
+                </button>
+            </form>
+
+            <div
+                style="text-align:center; margin-top:1.75rem; font-size:0.88rem; border-top:1px solid var(--border-color); padding-top:1.25rem;">
+                <a href="/" style="color:var(--accent-start); font-weight:700; text-decoration:none;">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Toko Pelanggan
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================
+         PORTAL KASIR & OPERATOR (POS OFFLINE & MESIN)
+         ============================================ -->
+    <div id="cashier-app">
+        <!-- Top Cashier Nav -->
+        <nav class="navbar" style="position:sticky; top:0;">
+            <div class="nav-container">
+                <a href="/kasir/" class="nav-logo">
+                    <div class="logo-badge-cmyk" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+                        <i class="fas fa-cash-register"></i>
+                    </div>
+                    <span>KASIR <strong>GILAR MEDIA</strong></span>
+                </a>
+
+                <div class="store-mode-pill"
+                    style="background:rgba(245, 158, 11, 0.12); color:#d97706; border-color:rgba(245, 158, 11, 0.3);">
+                    <span class="pulse-dot" style="background:#f59e0b; box-shadow:0 0 8px #f59e0b;"></span>
+                    <span>LACI KASIR TOKO OFFLINE AKTIF</span>
+                </div>
+
+                <div class="nav-actions">
+                    <span class="role-badge badge-cashier"><i class="fas fa-user-check"></i> Rian
+                        (Kasir/Operator)</span>
+                    <a href="/" class="btn btn-outline btn-sm" target="_blank" title="Lihat Tampilan Toko Online"><i
+                            class="fas fa-store"></i> Web Toko</a>
+                    <button type="button" class="btn btn-danger btn-sm" id="btn-cashier-logout"><i
+                            class="fas fa-sign-out-alt"></i> Keluar</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" style="padding-top: 2rem;">
+            <!-- Register Summary Cards (4 Metrik Laci & Modal Kembalian) -->
+            <div class="cashier-summary-cards">
+                <div class="summary-card">
+                    <div class="summary-icon" style="color:#6366f1; background:rgba(99,102,241,0.12);"><i
+                            class="fas fa-coins"></i></div>
+                    <div>
+                        <span>Modal Awal Pemilik</span>
+                        <h3 id="reg-initial-float" style="color:#6366f1;">Rp 200.000</h3>
+                        <small style="font-size:0.72rem; color:var(--text-tertiary);">Uang kembalian dari bos</small>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="color:#f59e0b;"><i class="fas fa-store"></i></div>
+                    <div>
+                        <span>Omset Kasir Hari Ini</span>
+                        <h3 id="reg-offline-sales">Rp 0</h3>
+                        <small style="font-size:0.72rem; color:var(--text-tertiary);" id="reg-trans-count">0 Nota (Tunai
+                            & QRIS)</small>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="color:#06b6d4; background:rgba(6,182,212,0.12);"><i
+                            class="fas fa-exchange-alt"></i></div>
+                    <div>
+                        <span>Kas Masuk / Keluar</span>
+                        <h3 id="reg-net-manual">Rp 0</h3>
+                        <small style="font-size:0.72rem; color:var(--text-tertiary);" id="reg-manual-sub">+Rp 0 / -Rp
+                            0</small>
+                    </div>
+                </div>
+                <div class="summary-card" style="border:1.5px solid #10b981; background:rgba(16,185,129,0.04);">
+                    <div class="summary-icon" style="color:#10b981; background:rgba(16,185,129,0.15);"><i
+                            class="fas fa-cash-register"></i></div>
+                    <div>
+                        <span>Total Uang Fisik di Laci</span>
+                        <h3 id="reg-cash-drawer" style="color:#10b981;">Rp 200.000</h3>
+                        <small style="font-size:0.72rem; color:#10b981; font-weight:700;"><i
+                                class="fas fa-check-double"></i> Wajib cocok di laci</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kontrol Cepat Kas Masuk / Keluar Toko -->
+            <div class="cash-action-bar"
+                style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:0.75rem 1.25rem; margin-bottom:1.5rem; flex-wrap:wrap; gap:0.75rem;">
+                <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.88rem;">
+                    <span style="font-weight:800; color:var(--text-primary);"><i class="fas fa-wallet"
+                            style="color:#f59e0b;"></i> Manajemen Kas Laci Fisik:</span>
+                    <span style="color:var(--text-secondary); font-size:0.8rem;">Pencatatan uang kembalian & pengeluaran
+                        operasional toko</span>
+                </div>
+                <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-sm btn-outline" id="btn-open-cash-history"
+                        style="font-size:0.8rem; font-weight:700;">
+                        <i class="fas fa-book"></i> Riwayat Mutasi Kas
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline" id="btn-open-cash-in"
+                        style="font-size:0.8rem; font-weight:700; border-color:#10b981; color:#10b981;">
+                        <i class="fas fa-plus-circle"></i> + Catat Kas Masuk
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline" id="btn-open-cash-out"
+                        style="font-size:0.8rem; font-weight:700; border-color:#ef4444; color:#ef4444;">
+                        <i class="fas fa-minus-circle"></i> - Catat Pengeluaran Toko
+                    </button>
+                </div>
+            </div>
+
+            <!-- POS Layout -->
+            <div class="pos-layout-grid">
+                <!-- Left: Quick Catalog & Manual Item Entry -->
+                <div class="pos-catalog-section">
+                    <!-- Manual Custom Item Card -->
+                    <div class="pos-manual-entry-box"
+                        style="background:var(--bg-card); border:2px dashed #f59e0b; border-radius:var(--radius-xl); padding:1.25rem 1.5rem; margin-bottom:1.75rem; box-shadow:var(--shadow-sm);">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                            <h4
+                                style="font-size:1.05rem; font-weight:800; color:#d97706; display:flex; align-items:center; gap:0.5rem; margin:0;">
+                                <i class="fas fa-plus-circle"></i> Input Item Manual / Biaya Kustom Walk-In
+                            </h4>
+                            <span class="badge badge-sale" style="font-size:0.75rem;">CUSTOM ORDER</span>
+                        </div>
+                        <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">
+                            Untuk layanan di luar katalog (contoh: Jilid Spiral, Fotocopy, Biaya Desain, Laminasi
+                            Dokumen, Potong Kertas, dll).
+                        </p>
+                        <form id="pos-manual-item-form">
+                            <div
+                                style="display:grid; grid-template-columns: 1.8fr 1.2fr; gap:0.75rem; margin-bottom:0.75rem;">
+                                <div>
+                                    <label
+                                        style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.25rem;">Nama
+                                        Layanan / Barang <span class="required">*</span></label>
+                                    <input type="text" id="pos-manual-name"
+                                        placeholder="Contoh: Jilid Spiral Kawat Cover Mika" required>
+                                </div>
+                                <div>
+                                    <label
+                                        style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.25rem;">Keterangan
+                                        / Satuan</label>
+                                    <input type="text" id="pos-manual-specs" placeholder="Contoh: 1 Buku (50 Halaman)">
+                                </div>
+                            </div>
+                            <div
+                                style="display:grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap:0.75rem; align-items:flex-end;">
+                                <div>
+                                    <label
+                                        style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.25rem;">Harga
+                                        Satuan (Rp) <span class="required">*</span></label>
+                                    <input type="number" id="pos-manual-price" placeholder="Contoh: 15000" min="500"
+                                        step="500" required>
+                                </div>
+                                <div>
+                                    <label
+                                        style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:0.25rem;">Qty</label>
+                                    <input type="number" id="pos-manual-qty" value="1" min="1" max="9999" required>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary btn-block" id="btn-add-manual-item"
+                                        style="background:linear-gradient(135deg,#f59e0b,#d97706); border:none; height:46px; font-weight:700;">
+                                        <i class="fas fa-cart-plus"></i> Tambah ke Nota
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Catalog Header -->
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                        <div>
+                            <h3
+                                style="font-size: 1.15rem; font-weight: 800; display:flex; align-items:center; gap:0.5rem; margin-bottom:0.2rem;">
+                                <i class="fas fa-layer-group" style="color:#f59e0b;"></i> Katalog Produk Toko
+                            </h3>
+                            <p style="font-size: 0.82rem; color: var(--text-secondary);">Klik tombol Tambah pada item
+                                pesanan pelanggan yang datang ke outlet</p>
+                        </div>
+                    </div>
+                    <div class="pos-catalog-grid" id="pos-catalog-grid"></div>
+                </div>
+
+                <!-- Right: Active Register Table & Checkout -->
+                <div class="pos-register-section">
+                    <h3
+                        style="font-size: 1.2rem; font-weight: 800; display:flex; align-items:center; gap:0.5rem; justify-content:space-between;">
+                        <span><i class="fas fa-receipt" style="color:#f59e0b;"></i> Nota Kasir Toko</span>
+                        <button type="button" class="btn btn-outline btn-sm" id="btn-pos-clear"
+                            style="font-size:0.75rem;">Reset</button>
+                    </h3>
+
+                    <!-- Customer Info Input -->
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem; margin-top:1rem;">
+                        <input type="text" id="pos-cust-name" placeholder="Nama Pelanggan Walk-In"
+                            style="padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                        <input type="text" id="pos-cust-phone" placeholder="No. WA (Opsional)"
+                            style="padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                    </div>
+
+                    <!-- Items Table -->
+                    <table class="pos-register-table">
+                        <thead>
+                            <tr>
+                                <th>Item & Spesifikasi</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="pos-cart-table-body"></tbody>
+                    </table>
+
+                    <!-- Payment Controls -->
+                    <div class="pos-total-box">
+                        <div class="pos-total-row">
+                            <span>TOTAL BAYAR:</span>
+                            <h2 id="pos-total-amount">Rp 0</h2>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods (Cash vs QRIS) -->
+                    <div class="pos-payment-radios">
+                        <label>
+                            <input type="radio" name="pos_payment" value="tunai" checked>
+                            <i class="fas fa-money-bill-wave" style="color:var(--success);"></i> Uang Tunai
+                        </label>
+                        <label>
+                            <input type="radio" name="pos_payment" value="qris">
+                            <i class="fas fa-qrcode" style="color:var(--accent-start);"></i> QRIS Kasir Toko
+                        </label>
+                    </div>
+
+                    <!-- Cash Input & Change -->
+                    <div id="pos-cash-input-group" style="margin-bottom:1.25rem;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+                            <label style="font-size:0.85rem; font-weight:700;">Uang Tunai Diterima (Rp):</label>
+                            <span style="font-size:0.75rem; color:var(--text-tertiary);">Klik tombol cepat:</span>
+                        </div>
+                        <!-- Quick-Cash Tender Pills -->
+                        <div class="pos-quick-cash-row">
+                            <button type="button" class="btn-quick-cash" data-cash="exact"><i class="fas fa-check"></i>
+                                Uang Pas</button>
+                            <button type="button" class="btn-quick-cash" data-cash="50000">50.000</button>
+                            <button type="button" class="btn-quick-cash" data-cash="100000">100.000</button>
+                            <button type="button" class="btn-quick-cash" data-cash="200000">200.000</button>
+                        </div>
+                        <input type="number" id="pos-cash-received" placeholder="Contoh: 100000"
+                            style="width:100%; padding:0.75rem; border:2px solid var(--border-color); border-radius:var(--radius-md); font-weight:700; font-size:1.1rem; background:var(--bg-secondary); color:var(--text-primary);">
+                        <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-size:0.95rem;">
+                            <span>Kembalian:</span>
+                            <strong id="pos-cash-change" style="font-size:1.1rem; color:var(--success);">Rp 0</strong>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button type="button" class="btn btn-primary btn-block btn-lg" id="btn-pos-checkout"
+                        style="background:linear-gradient(135deg,#f59e0b,#d97706); border-color:#d97706;">
+                        <i class="fas fa-print"></i> Bayar & Cetak Struk Nota Kasir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Machine Job Queue (Integrated Online & Offline) -->
+            <div class="queue-section" id="production-queue-section">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800;">
+                            <i class="fas fa-tasks" style="color:#f59e0b;"></i> Antrian Mesin Cetak Produksi
+                        </h3>
+                        <p style="color: var(--text-secondary); font-size: 0.88rem;">
+                            Daftar pekerjaan cetak aktif dari Toko Online (Web) dan Toko Offline (Kasir)
+                        </p>
+                    </div>
+                    <!-- Queue Filter Tabs -->
+                    <div class="queue-filter-buttons">
+                        <button type="button" class="queue-filter-btn active" data-queue-filter="all">Semua</button>
+                        <button type="button" class="queue-filter-btn" data-queue-filter="Verifikasi Desain">Verifikasi
+                            Desain</button>
+                        <button type="button" class="queue-filter-btn" data-queue-filter="Proses Printing">Sedang
+                            Dicetak</button>
+                        <button type="button" class="queue-filter-btn"
+                            data-queue-filter="Finishing & QC">Finishing</button>
+                        <button type="button" class="queue-filter-btn" data-queue-filter="Siap Diambil / Dikirim">Siap
+                            Diambil</button>
+                    </div>
+                </div>
+
+                <div class="queue-cards-grid" id="job-queue-list" style="margin-top: 1.5rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thermal Receipt Print Modal -->
+    <div class="modal-overlay" id="receipt-modal">
+        <div class="modal" style="max-width: 380px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-receipt"></i> Struk Nota Belanja</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1rem;">
+                <div id="receipt-print-area"></div>
+                <div style="display:flex; gap:0.5rem; margin-top:1.25rem;">
+                    <button type="button" class="btn btn-primary btn-block" id="btn-do-print-receipt"
+                        style="background:linear-gradient(135deg,#f59e0b,#d97706); border-color:#d97706;">
+                        <i class="fas fa-print"></i> Cetak Struk (Thermal 80mm)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Catat Kas Masuk (Tambahan Uang Kembalian / Kas Toko) -->
+    <div class="modal-overlay" id="modal-cash-in">
+        <div class="modal" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus-circle" style="color:var(--success);"></i> Catat Kas Masuk / Modal Kembalian
+                </h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <form id="form-cash-in">
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Nominal
+                            Kas Masuk (Rp) *</label>
+                        <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-in"
+                                data-amt="50000">+50.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-in"
+                                data-amt="100000">+100.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-in"
+                                data-amt="200000">+200.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-in"
+                                data-amt="500000">+500.000</button>
+                        </div>
+                        <input type="number" id="input-cash-in-amount" required placeholder="Contoh: 100000" min="1000"
+                            style="width:100%; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:1.1rem; font-weight:800;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label
+                            style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Kategori
+                            Pemasukan Kas</label>
+                        <select id="select-cash-in-category"
+                            style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                            <option value="Tambahan Modal Kembalian dari Pemilik" selected>Tambahan Modal Kembalian dari
+                                Pemilik</option>
+                            <option value="Sisa Pengembalian Belanja Operasional">Sisa Pengembalian Belanja Operasional
+                            </option>
+                            <option value="Kas Masuk Lain-Lain">Kas Masuk Lain-Lain</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label
+                            style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Keterangan
+                            / Catatan *</label>
+                        <input type="text" id="input-cash-in-notes" required
+                            placeholder="Contoh: Diberi uang pecahan kecil Rp 5.000 oleh Bapak Hendra"
+                            style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block btn-lg" style="font-weight:800;">
+                        <i class="fas fa-check-circle"></i> Simpan Kas Masuk ke Laci
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Catat Pengeluaran Toko (Petty Cash Operasional) -->
+    <div class="modal-overlay" id="modal-cash-out">
+        <div class="modal" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-minus-circle" style="color:var(--danger);"></i> Catat Pengeluaran Toko (Kas Keluar)
+                </h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <form id="form-cash-out">
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Nominal
+                            Pengeluaran Kas (Rp) *</label>
+                        <div style="display:flex; gap:0.4rem; margin-bottom:0.5rem; flex-wrap:wrap;">
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-out"
+                                data-amt="10000">10.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-out"
+                                data-amt="15000">15.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-out"
+                                data-amt="20000">20.000</button>
+                            <button type="button" class="btn btn-outline btn-sm btn-quick-cash-out"
+                                data-amt="50000">50.000</button>
+                        </div>
+                        <input type="number" id="input-cash-out-amount" required placeholder="Contoh: 15000" min="500"
+                            style="width:100%; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:1.1rem; font-weight:800;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label
+                            style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Kategori
+                            Pengeluaran Toko</label>
+                        <select id="select-cash-out-category"
+                            style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                            <option value="Beli Perlengkapan Packing (Lakban/Kardus/ATK)" selected>Beli Perlengkapan
+                                Packing (Lakban/Kardus/ATK)</option>
+                            <option value="Bensin & Transportasi Kurir Antar Cetakan">Bensin & Transportasi Kurir Antar
+                                Cetakan</option>
+                            <option value="Konsumsi & Air Minum Galon Toko">Konsumsi & Air Minum Galon Toko</option>
+                            <option value="Biaya Servis / Sparepart Darurat">Biaya Servis / Sparepart Darurat</option>
+                            <option value="Pengeluaran Operasional Lainnya">Pengeluaran Operasional Lainnya</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label
+                            style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:0.35rem;">Keterangan
+                            / Keperluan *</label>
+                        <input type="text" id="input-cash-out-notes" required
+                            placeholder="Contoh: Beli lakban coklat 2 roll untuk packing pesanan"
+                            style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-secondary); color:var(--text-primary); font-size:0.85rem;">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block btn-lg" style="font-weight:800;">
+                        <i class="fas fa-receipt"></i> Catat Pengeluaran dari Laci
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Riwayat Mutasi Kas & Rekonsiliasi Laci Toko -->
+    <div class="modal-overlay" id="modal-cash-history">
+        <div class="modal" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3><i class="fas fa-book" style="color:var(--accent-start);"></i> Buku Mutasi Kas & Rekonsiliasi Laci
+                    Toko</h3>
+                <button type="button" class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <div
+                    style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; margin-bottom:1.25rem; font-size:0.85rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+                        <span>Modal Awal Uang Kembalian (Pemilik):</span>
+                        <strong id="hist-modal-float" style="color:#6366f1;">Rp 200.000</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+                        <span>Pemasukan Tunai dari Nota Transaksi:</span>
+                        <strong id="hist-cash-sales" style="color:#10b981;">Rp 0</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+                        <span>Kas Masuk Manual Tambahan:</span>
+                        <strong id="hist-cash-in-manual" style="color:#06b6d4;">+Rp 0</strong>
+                    </div>
+                    <div
+                        style="display:flex; justify-content:space-between; margin-bottom:0.5rem; border-bottom:1px dashed var(--border-color); padding-bottom:0.5rem;">
+                        <span>Pengeluaran Kas Kecil Operasional:</span>
+                        <strong id="hist-cash-out-manual" style="color:#ef4444;">-Rp 0</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:800;">
+                        <span>TOTAL UANG FISIK DI LACI:</span>
+                        <strong id="hist-total-drawer" style="color:#10b981;">Rp 200.000</strong>
+                    </div>
+                </div>
+
+                <h4 style="font-size:0.9rem; font-weight:800; margin-bottom:0.65rem;">Log Mutasi Kas Masuk & Keluar Toko
+                </h4>
+                <div style="overflow-x:auto;">
+                    <table class="pos-register-table" style="font-size:0.8rem;">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th>
+                                <th>Jenis & Kategori</th>
+                                <th>Keterangan</th>
+                                <th style="text-align:right;">Nominal</th>
+                                <th>Oleh</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cash-history-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/security.js"></script>
+    <script src="../js/prices-data.js"></script>
+    <script src="../js/images-data.js"></script>
+    <script src="../js/products-data.js"></script>
+    <script src="../js/cashier.js"></script>
+    <script src="../js/ui.js"></script>
+    <script>
+        // Check cashier session
+        function checkCashierAuth() {
+            const session = Security.getActiveSession();
+            if (session && (session.role === 'cashier' || session.role === 'admin')) {
+                document.getElementById('cashier-login-gate').style.display = 'none';
+                document.getElementById('cashier-app').style.display = 'block';
+                CashierModule.render();
+            } else {
+                document.getElementById('cashier-login-gate').style.display = 'flex';
+                document.getElementById('cashier-app').style.display = 'none';
+            }
+        }
+
+        // Quick Auto-Fill Demo Button
+        const quickFillBtn = document.getElementById('btn-quick-fill-kasir');
+        if (quickFillBtn) {
+            quickFillBtn.addEventListener('click', () => {
+                document.getElementById('kasir-user').value = 'kasir';
+                document.getElementById('kasir-pass').value = 'kasir123';
+                document.getElementById('cashier-login-form').dispatchEvent(new Event('submit'));
+            });
+        }
+
+        // Toggle Password Visibility
+        const toggleBtn = document.getElementById('btn-toggle-kasir-pass');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const passInput = document.getElementById('kasir-pass');
+                const icon = toggleBtn.querySelector('i');
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    icon.className = 'fas fa-eye-slash';
+                } else {
+                    passInput.type = 'password';
+                    icon.className = 'fas fa-eye';
+                }
+            });
+        }
+
+        // Login form
+        document.getElementById('cashier-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const alertBox = document.getElementById('cashier-login-alert');
+            const submitBtn = document.getElementById('btn-submit-kasir');
+            const u = document.getElementById('kasir-user').value.trim();
+            const p = document.getElementById('kasir-pass').value.trim();
+
+            if (!u || !p) {
+                alertBox.innerHTML = `
+                    <div class="alert alert-error"><i class="fas fa-exclamation-circle"></i> Username dan password kasir wajib diisi!</div>
+                `;
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memverifikasi...';
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identifier: u, password: p })
+                });
+                const data = await res.json();
+                if (data.success && data.user && (data.user.role === 'cashier' || data.user.role === 'admin')) {
+                    Security.setActiveSession(data.user);
+                    checkCashierAuth();
+                    return;
+                }
+            } catch (err) {
+                console.warn('API login error, proceeding to direct check:', err);
+            }
+
+            // Fallback direct check
+            const cleanUser = u.toLowerCase();
+            if ((cleanUser === 'kasir' || cleanUser === '081299887766') && p === 'kasir123') {
+                Security.setActiveSession({
+                    id: 'USR-002',
+                    userId: 'USR-002',
+                    role: 'cashier',
+                    username: 'kasir',
+                    name: 'Rian (Kasir & Operator Mesin)',
+                    phone: '081299887766'
+                });
+                checkCashierAuth();
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk Sistem Kasir';
+                alertBox.innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i> Username atau password kasir salah!
+                        <div style="margin-top:0.35rem; font-size:0.82rem;">Gunakan <strong>kasir</strong> dan <strong>kasir123</strong>, atau klik tombol di atas.</div>
+                    </div>
+                `;
+            }
+        });
+
+        // Logout
+        document.getElementById('btn-cashier-logout').addEventListener('click', () => {
+            Security.clearSession();
+            checkCashierAuth();
+        });
+
+        document.addEventListener('DOMContentLoaded', checkCashierAuth);
+    </script>
+</body>
+
+</html>

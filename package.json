@@ -1,0 +1,20 @@
+{
+  "name": "percetakan-gilar-media",
+  "version": "1.0.0",
+  "description": "Sistem Informasi & E-Commerce Percetakan Gilar Media",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "percetakan",
+    "skripsi",
+    "gilar-media"
+  ],
+  "author": "Gilar Media",
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
+

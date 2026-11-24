@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mat-flexi-standar",
+    "name": "Roll Flexi Standar Outdoor (3.2m × 50m)",
+    "unit": "meter",
+    "stock": 290,
+    "minStock": 50
+  },
+  {
+    "id": "mat-x-banner",
+    "name": "Rangka Standing X-Banner Fiber 60x160cm",
+    "unit": "set",
+    "stock": 45,
+    "minStock": 15
+  },
+  {
+    "id": "mat-stiker-kromo",
+    "name": "Kertas Stiker Kromo A3",
+    "unit": "lembar",
+    "stock": 1450,
+    "minStock": 300
+  },
+  {
+    "id": "mat-kertas-bw",
+    "name": "Kertas BW (Blues White) (Undangan & Kartu Nama)",
+    "unit": "lembar",
+    "stock": 1100,
+    "minStock": 250
+  },
+  {
+    "id": "mat-art-carton",
+    "name": "Kertas Art Carton (Kartu Nama & Box Nasi)",
+    "unit": "lembar",
+    "stock": 920,
+    "minStock": 250
+  },
+  {
+    "id": "mat-art-paper",
+    "name": "Kertas Art Paper 100g - 120g (Brosur & Kalender)",
+    "unit": "rim",
+    "stock": 28,
+    "minStock": 5
+  },
+  {
+    "id": "mat-kertas-ncr",
+    "name": "Kertas NCR Folio Rangkap 2 (Nota Buku)",
+    "unit": "rim",
+    "stock": 35,
+    "minStock": 8
+  },
+  {
+    "id": "mat-yasin-cover",
+    "name": "Bahan Hard Cover & Soft Cover (Buku Yasin)",
+    "unit": "pcs",
+    "stock": 220,
+    "minStock": 40
+  },
+  {
+    "id": "mat-kertas-duplex-box",
+    "name": "Kertas Duplex / Ivory Food Grade (Box Nasi Kemasan)",
+    "unit": "lembar",
+    "stock": 2500,
+    "minStock": 500
+  },
+  {
+    "id": "mat-kertas-foto",
+    "name": "Kertas Foto Premium (Cetak Foto)",
+    "unit": "lembar",
+    "stock": 350,
+    "minStock": 50
+  },
+  {
+    "id": "mat-ink-solvent",
+    "name": "Tinta Mesin Outdoor Eco-Solvent (CMYK)",
+    "unit": "liter",
+    "stock": 18,
+    "minStock": 5
+  },
+  {
+    "id": "mat-tinta-digital",
+    "name": "Tinta Mesin Digital Printing & Offset",
+    "unit": "liter",
+    "stock": 24,
+    "minStock": 6
+  }
+]

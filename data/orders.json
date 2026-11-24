@@ -1,0 +1,335 @@
+[
+  {
+    "id": "DM-ONL-TEST-1795135330693",
+    "channel": "online",
+    "createdAt": "2026-11-20T00:42:10.718Z",
+    "userId": null,
+    "cashierName": null,
+    "customer": {
+      "name": "Budi Test Siswa",
+      "phone": "08123456789",
+      "email": "budi@test.com"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "qris",
+    "paymentType": "dp",
+    "paymentStatus": "dp_dibayar",
+    "amountPaid": 100000,
+    "remainingBalance": 100000,
+    "cashReceived": 200000,
+    "change": 0,
+    "items": [
+      {
+        "name": "Brosur Full Color A4",
+        "specs": "Art Paper 150g",
+        "price": 200000,
+        "quantity": 500
+      }
+    ],
+    "total": 200000,
+    "status": "Antrian Mesin",
+    "paymentProof": {
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP...mockProofImage...",
+      "uploadedAt": "2026-11-20T00:42:10.724Z",
+      "note": "Struk transfer m-BCA via checkout web"
+    },
+    "paymentVerifiedAt": "2026-11-20T00:42:10.727Z",
+    "paymentVerifiedBy": "Bapak Hendra (Master Admin)"
+  },
+  {
+    "id": "DM-POS-MWNX044L-VAJ6",
+    "channel": "offline",
+    "createdAt": "2026-11-19T18:59:59.606Z",
+    "userId": null,
+    "cashierName": "Bapak Hendra (Master Admin)",
+    "customer": {
+      "name": "Pelanggan Walk-In",
+      "phone": "-",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "tunai",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 1500,
+    "remainingBalance": 0,
+    "cashReceived": 2000,
+    "change": 500,
+    "items": [
+      {
+        "id": "POS-mwnwzwgt",
+        "productId": "undangan-kertas-bw",
+        "name": "Undangan",
+        "specs": "Standar 1 pcs",
+        "quantity": 1,
+        "price": 1500
+      }
+    ],
+    "total": 1500,
+    "status": "Proses Printing"
+  },
+  {
+    "id": "DM-POS-MW9SG3ZC-9SQO",
+    "channel": "offline",
+    "createdAt": "2026-11-09T21:43:41.355Z",
+    "userId": null,
+    "cashierName": "Bapak Hendra (Master Admin)",
+    "customer": {
+      "name": "ggg",
+      "phone": "000",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "tunai",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 12500,
+    "remainingBalance": 0,
+    "cashReceived": 20000,
+    "change": 7500,
+    "items": [
+      {
+        "id": "POS-mw9sfzpz",
+        "productId": "id-card-pvc",
+        "name": "ID Card Pegawai / Member PVC Tebal",
+        "specs": "Standar 1 pcs",
+        "quantity": 1,
+        "price": 12500
+      }
+    ],
+    "total": 12500,
+    "status": "Proses Printing"
+  },
+  {
+    "id": "DM-POS-MW9SFODS-FNZS",
+    "channel": "offline",
+    "createdAt": "2026-11-09T21:43:21.139Z",
+    "userId": null,
+    "cashierName": "Bapak Hendra (Master Admin)",
+    "customer": {
+      "name": "ggg",
+      "phone": "000",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "tunai",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 12500,
+    "remainingBalance": 0,
+    "cashReceived": 20000,
+    "change": 7500,
+    "items": [
+      {
+        "id": "POS-mw9setgw",
+        "productId": "id-card-pvc",
+        "name": "ID Card Pegawai / Member PVC Tebal",
+        "specs": "Standar 1 pcs",
+        "quantity": 1,
+        "price": 12500
+      }
+    ],
+    "total": 12500,
+    "status": "Proses Printing"
+  },
+  {
+    "id": "DM-POS-MW9SEKHK-BT6N",
+    "channel": "offline",
+    "createdAt": "2026-11-09T21:42:29.435Z",
+    "userId": null,
+    "cashierName": "Bapak Hendra (Master Admin)",
+    "customer": {
+      "name": "ggg",
+      "phone": "1212",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "tunai",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 12500,
+    "remainingBalance": 0,
+    "cashReceived": 20000,
+    "change": 7500,
+    "items": [
+      {
+        "id": "POS-mw9sbu94",
+        "productId": "id-card-pvc",
+        "name": "ID Card Pegawai / Member PVC Tebal",
+        "specs": "Standar 1 pcs",
+        "quantity": 1,
+        "price": 12500
+      }
+    ],
+    "total": 12500,
+    "status": "Proses Printing"
+  },
+  {
+    "id": "DM-ONL-MW9RP6HL-DXXP",
+    "channel": "online",
+    "createdAt": "2026-11-09T21:22:44.892Z",
+    "userId": "USR-MW9R9V4I",
+    "cashierName": null,
+    "customer": {
+      "name": "Rechel Moon Sora",
+      "phone": "0888899898",
+      "email": "rechelmoonskdlvolkov@gmail.com",
+      "address": "Jalan Danau Singkarak Blok E1 No.28, RT.07 RW.13, Kel.Kalijaga Kec. Harjamukti, Taman Kalijaga Permai, Kota Cirebon"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "qris",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 60000,
+    "remainingBalance": 0,
+    "cashReceived": 60000,
+    "change": 0,
+    "items": [
+      {
+        "id": "ITM-mw9ri6v5",
+        "productId": "banner-flexi-standar",
+        "name": "Spanduk / Banner Flexi 280g Standar",
+        "specs": "Ukuran 3.0m × 1.0m, Polos (Potong Pas Gambar) (Gratis) (×1)",
+        "quantity": 1,
+        "price": 60000,
+        "fileName": "Desain_Kustom_Customer.pdf",
+        "notes": "tes"
+      }
+    ],
+    "total": 60000,
+    "status": "Verifikasi Desain"
+  },
+  {
+    "id": "DM-POS-MW8UB6UM-Z43J",
+    "channel": "offline",
+    "createdAt": "2026-11-09T05:48:04.855Z",
+    "userId": null,
+    "cashierName": "Bapak Hendra (Master Admin)",
+    "customer": {
+      "name": "Pelanggan Walk-In",
+      "phone": "-",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "tunai",
+    "cashReceived": 1000,
+    "change": 0,
+    "items": [
+      {
+        "id": "POS-MAN-mw8uaz3f",
+        "productId": "manual-custom",
+        "name": "penggaris",
+        "specs": "Custom Order Walk-In",
+        "quantity": 1,
+        "price": 1000
+      }
+    ],
+    "total": 1000,
+    "status": "Proses Printing",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 1000,
+    "remainingBalance": 0
+  },
+  {
+    "id": "DM-ONL-MW8PUU6O",
+    "channel": "online",
+    "createdAt": "2026-11-09T03:43:23.472Z",
+    "userId": "USR-MW8PUBXJ",
+    "cashierName": null,
+    "customer": {
+      "email": "ahmad.kurnia@gmail.com",
+      "name": "Ahmad Kurniawan",
+      "phone": "085811223344",
+      "address": "Komplek Percetakan Indah Blok C-12, Jakarta Barat"
+    },
+    "deliveryMethod": "Ambil di Toko",
+    "paymentMethod": "qris",
+    "cashReceived": 215000,
+    "change": 0,
+    "items": [
+      {
+        "fileName": "spanduk_event_2026.pdf",
+        "productId": "banner-flexi-korin",
+        "specs": "Ukuran: 3.0m x 1.0m (3.00 m²) | Finishing: Mata Ayam (Ring Keliling)",
+        "price": 215000,
+        "quantity": 2,
+        "name": "Spanduk Flexi Korea 440g High-Res",
+        "notes": "Warna merah tolong dibuat pekat sesuai CMYK"
+      }
+    ],
+    "total": 215000,
+    "status": "Verifikasi Desain",
+    "paymentType": "dp",
+    "paymentStatus": "dp_dibayar",
+    "amountPaid": 107500,
+    "remainingBalance": 107500
+  },
+  {
+    "id": "DM-ONL-K7X9-2A",
+    "channel": "online",
+    "createdAt": "2026-11-09T08:30:00.000Z",
+    "userId": "USR-003",
+    "customer": {
+      "name": "Siti Rahma",
+      "phone": "081234567890",
+      "email": "siti@gmail.com",
+      "address": "Jl. Melati Raya No. 14, Jakarta Selatan"
+    },
+    "deliveryMethod": "Kirim Ekspedisi",
+    "paymentMethod": "qris",
+    "items": [
+      {
+        "id": "ITM-01",
+        "name": "Spanduk / Banner Flexi 280g Standar",
+        "specs": "Ukuran 3.0m × 1.0m (3.00 m²), Mata Ayam (Ring 4 Sudut) (×1)",
+        "quantity": 1,
+        "price": 62500,
+        "fileName": "Banner_Promo_Grand_Opening.pdf"
+      },
+      {
+        "id": "ITM-02",
+        "name": "Stiker Vinyl Putih A3+ Anti-Air & Robek",
+        "specs": "Kiss Cut Sesuai Pola Desain (×5)",
+        "quantity": 5,
+        "price": 80000,
+        "fileName": "Label_Kemasan_Botol_Kopi.png"
+      }
+    ],
+    "total": 142500,
+    "status": "Proses Printing",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 142500,
+    "remainingBalance": 0
+  },
+  {
+    "id": "DM-POS-M4P1-8B",
+    "channel": "offline",
+    "createdAt": "2026-11-09T09:15:00.000Z",
+    "cashierName": "Rian (Kasir & Operator)",
+    "customer": {
+      "name": "Budi Santoso (Walk-In)",
+      "phone": "085711223344",
+      "address": "Ambil di Toko Percetakan Gilar Media"
+    },
+    "paymentMethod": "tunai",
+    "cashReceived": 100000,
+    "change": 15000,
+    "items": [
+      {
+        "id": "ITM-03",
+        "name": "X-Banner Fiber 60x160cm + Stand",
+        "specs": "Standar 1 set + Standing Fiber",
+        "quantity": 1,
+        "price": 85000
+      }
+    ],
+    "total": 85000,
+    "status": "Siap Diambil / Dikirim",
+    "paymentType": "full",
+    "paymentStatus": "lunas",
+    "amountPaid": 85000,
+    "remainingBalance": 0
+  }
+]

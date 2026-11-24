@@ -1,0 +1,251 @@
+/* ============================================
+   CHECKOUT STYLES
+   ============================================ */
+.checkout-modal {
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.checkout-step {
+    animation: fadeIn 0.3s ease;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: var(--space-2xl);
+}
+
+.step-indicator .step {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    background: var(--bg-card);
+    transition: all var(--transition-base);
+}
+
+.step-indicator .step.active {
+    border-color: var(--accent-start);
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.step-indicator .step.completed {
+    border-color: var(--success);
+    background: var(--success);
+    color: white;
+}
+
+.step-line {
+    width: 60px;
+    height: 2px;
+    background: var(--border-color);
+    transition: background var(--transition-base);
+}
+
+.step-line.active {
+    background: var(--success);
+}
+
+.checkout-step h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.checkout-step h4 i {
+    color: var(--accent-start);
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.form-group .required {
+    color: var(--danger);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-start);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.form-group input.error,
+.form-group textarea.error {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.form-error {
+    display: block;
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: var(--space-xs);
+    font-weight: 500;
+}
+
+/* Payment Methods */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.payment-option {
+    cursor: pointer;
+}
+
+.payment-option input {
+    display: none;
+}
+
+.payment-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.payment-card:hover {
+    border-color: var(--accent-start);
+    background: var(--gradient-card);
+}
+
+.payment-option input:checked + .payment-card {
+    border-color: var(--accent-start);
+    background: var(--gradient-card);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.payment-card i {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--accent-start);
+    flex-shrink: 0;
+}
+
+.payment-card strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.payment-card span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.payment-badge {
+    position: absolute;
+    top: -8px;
+    right: var(--space-md);
+    background: var(--gradient-primary);
+    color: white !important;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem !important;
+    font-weight: 700;
+}
+
+/* Checkout Navigation */
+.checkout-nav {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.checkout-nav .btn {
+    flex: 1;
+}
+
+/* Order Summary */
+.order-summary {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.order-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    font-size: 0.9rem;
+}
+
+.order-summary-item.total {
+    border-top: 2px solid var(--border-color);
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.order-summary-item.total .order-total-price {
+    color: var(--accent-start);
+    font-size: 1.3rem;
+}
+
+.order-customer-info {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.order-customer-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+.order-customer-info strong {
+    color: var(--text-primary);
+}
+

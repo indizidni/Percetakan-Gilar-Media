@@ -1,0 +1,360 @@
+[
+  {
+    "id": "banner-flexi-standar",
+    "name": "Spanduk Biasa",
+    "category": "spanduk",
+    "badge": "hot",
+    "type": "meteran",
+    "rating": 4.9,
+    "ratingCount": 1420,
+    "productionTime": "1 - 2 Jam (Bisa Ditunggu)",
+    "description": "Bahan Flexi standar outdoor tahan cuaca. Harga Rp 35.000 / meter.",
+    "pricePerUnit": 35000,
+    "originalPrice": 40000,
+    "unit": "m2",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "polos", "label": "Polos (Potong Pas Gambar)" },
+      { "id": "mata-ayam", "label": "Mata Ayam (Ring 4 Sudut / Keliling)" },
+      { "id": "selongsong", "label": "Selongsong (Untuk Tiang Bambu/Besi)" },
+      { "id": "lipat-lem", "label": "Lipat Lem Rapi Keliling" }
+    ],
+    "finishingPrices": {
+      "polos": 0,
+      "mata-ayam": 2500,
+      "selongsong": 3000,
+      "lipat-lem": 2000
+    }
+  },
+  {
+    "id": "x-banner",
+    "name": "X-Banner (Cetak + Rangka Stand)",
+    "category": "spanduk",
+    "badge": "hot",
+    "type": "set",
+    "rating": 4.8,
+    "ratingCount": 970,
+    "productionTime": "1 - 2 Jam",
+    "description": "Lengkap 1 set display promosi rangka silang fiber kokoh + bahan cetak spanduk Albatros halus. Harga Rp 100.000 / set.",
+    "pricePerUnit": 100000,
+    "originalPrice": 120000,
+    "unit": "set",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "standar", "label": "Cetak Standar High-Res" },
+      { "id": "laminasi-doff", "label": "Laminasi Doff Anti Pantul" },
+      { "id": "laminasi-glossy", "label": "Laminasi Glossy Mengkilap" }
+    ],
+    "finishingPrices": {
+      "standar": 0,
+      "laminasi-doff": 15000,
+      "laminasi-glossy": 15000
+    }
+  },
+  {
+    "id": "stiker-chromo-a3",
+    "name": "Stiker Kromo A3",
+    "category": "stiker",
+    "badge": "hot",
+    "type": "lembaran",
+    "rating": 4.8,
+    "ratingCount": 2310,
+    "productionTime": "1 - 3 Jam",
+    "description": "Bahan stiker kromo licin mengkilap ukuran lembar A3. Harga eceran Rp 10.000 / lembar A3, atau paket 1 Rim (500 lbr) Rp 1.000.000.",
+    "pricePerUnit": 10000,
+    "originalPrice": 12000,
+    "unit": "lembar",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "tanpa-cutting", "label": "Hanya Cetak Lembaran A3" },
+      { "id": "kiss-cut", "label": "Kiss Cut (Potong Pola Siap Kupas)" },
+      { "id": "die-cut", "label": "Die Cut (Potong Putus per Pcs)" }
+    ],
+    "finishingPrices": {
+      "tanpa-cutting": 0,
+      "kiss-cut": 3000,
+      "die-cut": 4500
+    }
+  },
+  {
+    "id": "kartu-nama-box",
+    "name": "Kartu Nama (1 Pak Isi 100 Pcs)",
+    "category": "dokumen",
+    "badge": "hot",
+    "type": "box",
+    "rating": 4.9,
+    "ratingCount": 1840,
+    "productionTime": "2 - 4 Jam",
+    "description": "Bahan Kertas BW (Blues White) / Art Carton tebal berkualitas. Harga Rp 50.000 (1 pak isi 100 pcs kartu).",
+    "pricePerUnit": 50000,
+    "originalPrice": 60000,
+    "unit": "box",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "1-sisi", "label": "Bahan BW / Art Carton Cetak 1 Sisi" },
+      { "id": "2-sisi", "label": "Cetak Bolak-Balik (2 Sisi)" },
+      { "id": "2-sisi-laminasi-doff", "label": "2 Sisi + Laminasi Doff Mewah" }
+    ],
+    "finishingPrices": {
+      "1-sisi": 0,
+      "2-sisi": 15000,
+      "2-sisi-laminasi-doff": 25000
+    }
+  },
+  {
+    "id": "brosur-flyer-a4",
+    "name": "Brosur (1 Rim)",
+    "category": "dokumen",
+    "badge": "sale",
+    "type": "rim",
+    "rating": 4.8,
+    "ratingCount": 650,
+    "productionTime": "1 - 2 Hari Kerja",
+    "description": "Bahan Kertas Art Paper 100 gsm – 120 gram cetak offset full color. Harga Rp 750.000 / rim (500 lembar).",
+    "pricePerUnit": 750000,
+    "originalPrice": 850000,
+    "unit": "rim",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "1-sisi", "label": "Cetak 1 Sisi Full Color" },
+      { "id": "2-sisi", "label": "Cetak 2 Sisi Bolak-Balik" },
+      { "id": "lipat-3", "label": "Lipat 3 (Tri-Fold)" }
+    ],
+    "finishingPrices": {
+      "1-sisi": 0,
+      "2-sisi": 150000,
+      "lipat-3": 75000
+    }
+  },
+  {
+    "id": "cetak-foto-highres",
+    "name": "Cetak Foto",
+    "category": "dokumen",
+    "badge": "new",
+    "type": "lembaran",
+    "rating": 4.8,
+    "ratingCount": 290,
+    "productionTime": "1 - 2 Jam (Bisa Ditunggu)",
+    "description": "Bahan kertas Foto berkualitas lab cetak tajam dan jernih. Harga Rp 25.000 / lembar.",
+    "pricePerUnit": 25000,
+    "originalPrice": 30000,
+    "unit": "lembar",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "glossy", "label": "Kertas Foto Glossy Mengkilap" },
+      { "id": "silky", "label": "Kertas Foto Silky Doff (Kulit Jeruk)" }
+    ],
+    "finishingPrices": {
+      "glossy": 0,
+      "silky": 3000
+    }
+  },
+  {
+    "id": "undangan-kertas-bw",
+    "name": "Undangan",
+    "category": "buku",
+    "badge": "hot",
+    "type": "pcs",
+    "rating": 4.9,
+    "ratingCount": 420,
+    "productionTime": "3 - 5 Hari Kerja",
+    "description": "Bahan kertas BW (Blues White). Ukuran 36 cm × 39.5 cm. Harga @ Rp 1.500 untuk pesanan 1.000 undangan.",
+    "pricePerUnit": 1500,
+    "originalPrice": 2000,
+    "unit": "pcs",
+    "minOrder": 100,
+    "imageUrl": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "standar", "label": "Pond Garis Lipat Presisi" },
+      { "id": "plastik-opp", "label": "Plus Plastik OPP Pembungkus" },
+      { "id": "foil-emas", "label": "Plus Poly Emas / Perak Mengkilap" }
+    ],
+    "finishingPrices": {
+      "standar": 0,
+      "plastik-opp": 250,
+      "foil-emas": 750
+    }
+  },
+  {
+    "id": "kalender-art-paper",
+    "name": "Kalender",
+    "category": "buku",
+    "badge": "new",
+    "type": "pcs",
+    "rating": 4.8,
+    "ratingCount": 310,
+    "productionTime": "4 - 7 Hari Kerja",
+    "description": "Bahan kertas Art Paper berkualitas. Ukuran 50 cm × 36 cm. Harga @ Rp 5.000 untuk pemesanan 1.000 kalender.",
+    "pricePerUnit": 5000,
+    "originalPrice": 6500,
+    "unit": "pcs",
+    "minOrder": 50,
+    "imageUrl": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "klem-seng", "label": "Finishing Klem Seng Gantungan Kalender" },
+      { "id": "spiral", "label": "Jilid Spiral Kawat + Hanger" }
+    ],
+    "finishingPrices": {
+      "klem-seng": 0,
+      "spiral": 2000
+    }
+  },
+  {
+    "id": "nota-buku-ncr",
+    "name": "Nota Buku",
+    "category": "buku",
+    "badge": "hot",
+    "type": "rim",
+    "rating": 4.9,
+    "ratingCount": 680,
+    "productionTime": "2 - 3 Hari Kerja",
+    "description": "Bahan kertas NCR (Carbonless). Ukuran Folio (F4) Rangkap 2 (2 Ply). Harga 1 Rim Rp 250.000.",
+    "pricePerUnit": 250000,
+    "originalPrice": 280000,
+    "unit": "rim",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "standar-jilid", "label": "Jilid Blok Lem & Porporasi Sobekan" },
+      { "id": "nomorator", "label": "Cetak Nomorator Seri Nota Otomatis" }
+    ],
+    "finishingPrices": {
+      "standar-jilid": 0,
+      "nomorator": 25000
+    }
+  },
+  {
+    "id": "buku-yasin-hardcover",
+    "name": "Buku Yasin (Hard Cover)",
+    "category": "buku",
+    "badge": "new",
+    "type": "pcs",
+    "rating": 4.9,
+    "ratingCount": 520,
+    "productionTime": "3 - 5 Hari Kerja",
+    "description": "Hard Cover. Bahan isi HVS / Art Paper. Harga satuan Rp 20.000 – 50.000 (Standar: Rp 25.000).",
+    "pricePerUnit": 25000,
+    "originalPrice": 30000,
+    "unit": "pcs",
+    "minOrder": 20,
+    "imageUrl": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "hvs-standar", "label": "Bahan Isi Kertas HVS Standar (Rp 20.000)" },
+      { "id": "art-paper-lux", "label": "Bahan Isi Art Paper Licin Glossy (Rp 25.000)" },
+      { "id": "majmu-syarif", "label": "Edisi Tebal Majmu Syarif Hard Cover (Rp 50.000)" }
+    ],
+    "finishingPrices": {
+      "hvs-standar": -5000,
+      "art-paper-lux": 0,
+      "majmu-syarif": 25000
+    }
+  },
+  {
+    "id": "buku-yasin-softcover",
+    "name": "Buku Yasin (Soft Cover)",
+    "category": "buku",
+    "badge": "sale",
+    "type": "pcs",
+    "rating": 4.8,
+    "ratingCount": 430,
+    "productionTime": "2 - 3 Hari Kerja",
+    "description": "Soft Cover. Bahan isi HVS / Art Paper. Harga satuan Rp 7.000 – 15.000 (Standar: Rp 10.000).",
+    "pricePerUnit": 10000,
+    "originalPrice": 13000,
+    "unit": "pcs",
+    "minOrder": 25,
+    "imageUrl": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "hvs-tipis", "label": "Bahan Isi HVS 96 Hal (Rp 7.000)" },
+      { "id": "hvs-standar", "label": "Bahan Isi HVS 128 Hal (Rp 10.000)" },
+      { "id": "art-paper-144", "label": "Bahan Isi Art Paper 144 Hal Glossy (Rp 15.000)" }
+    ],
+    "finishingPrices": {
+      "hvs-tipis": -3000,
+      "hvs-standar": 0,
+      "art-paper-144": 5000
+    }
+  },
+  {
+    "id": "box-nasi-kemasan",
+    "name": "Box Nasi Kemasan",
+    "category": "kemasan",
+    "badge": "hot",
+    "type": "pcs",
+    "rating": 4.9,
+    "ratingCount": 780,
+    "productionTime": "3 - 6 Hari Kerja",
+    "description": "Bahan Art Carton / Ivory / Duplex. Harga Rp 2.500 / pc minimal proses 1.000 Box.",
+    "pricePerUnit": 2500,
+    "originalPrice": 3200,
+    "unit": "pcs",
+    "minOrder": 100,
+    "imageUrl": "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "duplex", "label": "Bahan Kertas Duplex Box" },
+      { "id": "ivory", "label": "Bahan Kertas Ivory Putih Bersih" },
+      { "id": "art-carton", "label": "Bahan Kertas Art Carton Tebal" }
+    ],
+    "finishingPrices": {
+      "duplex": 0,
+      "ivory": 500,
+      "art-carton": 500
+    }
+  },
+  {
+    "id": "jasa-design-setting",
+    "name": "Jasa Design Setting",
+    "category": "jasa",
+    "badge": "hot",
+    "type": "pcs",
+    "rating": 4.9,
+    "ratingCount": 540,
+    "productionTime": "1 - 3 Jam",
+    "description": "Jasa Design Setting, mulai dari Rp 15.000 – 60.000 tergantung pesanan produk (Standar: Rp 25.000).",
+    "pricePerUnit": 25000,
+    "originalPrice": 35000,
+    "unit": "pcs",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "setting-ringan", "label": "Setting Ringan (Rp 15.000)" },
+      { "id": "desain-standar", "label": "Desain Standar (Rp 25.000)" },
+      { "id": "desain-kompleks", "label": "Desain Kompleks / Khusus (Rp 60.000)" }
+    ],
+    "finishingPrices": {
+      "setting-ringan": -10000,
+      "desain-standar": 0,
+      "desain-kompleks": 35000
+    }
+  },
+  {
+    "id": "jasa-potong-kertas",
+    "name": "Jasa Potong Kertas",
+    "category": "jasa",
+    "badge": "new",
+    "type": "pcs",
+    "rating": 4.8,
+    "ratingCount": 210,
+    "productionTime": "1 Jam (Bisa Ditunggu)",
+    "description": "Jasa potong kertas tergantung potongan, umumnya dari harga Rp 5.000 – seterusnya.",
+    "pricePerUnit": 5000,
+    "originalPrice": 7500,
+    "unit": "pcs",
+    "minOrder": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=600&h=450&fit=crop",
+    "finishingOptions": [
+      { "id": "potong-lurus", "label": "Potong Sisir Bersih / Standar (Rp 5.000)" },
+      { "id": "potong-cacah", "label": "Potong Banyak Bagian / Cacah (Rp 10.000)" }
+    ],
+    "finishingPrices": {
+      "potong-lurus": 0,
+      "potong-cacah": 5000
+    }
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "qrisMerchantName": "PERCETAKAN GILAR MEDIA",
+  "qrisImage": "",
+  "bankBCA": {
+    "bankName": "Bank BCA",
+    "accountNumber": "7829-1029-38",
+    "holderName": "CV. GILAR MEDIA PRINTING"
+  },
+  "bankBNI": {
+    "bankName": "Bank BNI",
+    "accountNumber": "0928-3746-12",
+    "holderName": "CV. GILAR MEDIA PRINTING"
+  },
+  "bankMandiri": {
+    "bankName": "Bank Mandiri",
+    "accountNumber": "137-00-1928374-1",
+    "holderName": "CV. GILAR MEDIA PRINTING"
+  },
+  "ewallet": {
+    "provider": "DANA / GoPay / OVO",
+    "accountNumber": "0812-3456-7890",
+    "holderName": "Percetakan Gilar Media (Kasir)"
+  },
+  "lastUpdated": "2026-11-20T07:50:00.000Z",
+  "updatedBy": "Master Admin"
+}
+

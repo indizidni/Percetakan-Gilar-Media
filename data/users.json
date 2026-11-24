@@ -1,0 +1,66 @@
+[
+  {
+    "id": "USR-001",
+    "username": "admin",
+    "name": "Bapak Hendra (Master Admin)",
+    "phone": "081122334455",
+    "email": "admin@digitalmedia.co.id",
+    "passwordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "role": "admin",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "USR-002",
+    "username": "kasir",
+    "name": "Rian (Kasir & Operator)",
+    "phone": "081299887766",
+    "email": "kasir@digitalmedia.co.id",
+    "passwordHash": "f02b7c1e519e4fa436147f7e1399974f9510aa9c8e0cb8be29151eb540f9d214",
+    "role": "cashier",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "USR-003",
+    "username": "pelanggan",
+    "name": "Siti Rahma",
+    "phone": "081234567890",
+    "email": "siti@gmail.com",
+    "passwordHash": "5cc5057444a9c3ec3b3d700c813bff07fb3e20a5231599112d168553242de232",
+    "role": "customer",
+    "address": "Jl. Melati Raya No. 14, Jakarta Selatan",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "USR-MW8PUBXJ",
+    "username": "085811223344",
+    "name": "Ahmad Kurniawan",
+    "phone": "085811223344",
+    "email": "ahmad.kurnia@gmail.com",
+    "address": "Komplek Percetakan Indah Blok C-12, Jakarta Barat",
+    "passwordHash": "6e659deaa85842cdabb5c6305fcc40033ba43772ec00d45c2a3c921741a5e377",
+    "role": "customer",
+    "createdAt": "2026-11-09T03:42:59.816Z"
+  },
+  {
+    "id": "USR-MW8Q95RA",
+    "username": "085920501339",
+    "name": "agus almahno",
+    "phone": "085920501339",
+    "email": "",
+    "address": "jatinegara",
+    "passwordHash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+    "role": "customer",
+    "createdAt": "2026-11-09T03:54:31.654Z"
+  },
+  {
+    "id": "USR-MW9R9V4I",
+    "username": "0888899898",
+    "name": "Rechel Moon Sora",
+    "phone": "0888899898",
+    "email": "rechelmoonskdlvolkov@gmail.com",
+    "address": "Jalan Danau Singkarak Blok E1 No.28, RT.07 RW.13, Kel.Kalijaga Kec. Harjamukti, Taman Kalijaga Permai, Kota Cirebon",
+    "passwordHash": "4bb7a8b99609b0b8b1d534694bb1f31f129138a2f2a11f8e8702eedbb792922e",
+    "role": "customer",
+    "createdAt": "2026-11-09T21:10:50.323Z"
+  }
+]

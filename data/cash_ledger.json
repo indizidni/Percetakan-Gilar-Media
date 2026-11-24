@@ -1,0 +1,34 @@
+{
+  "initialFloat": 200000,
+  "lastUpdated": "2026-11-20T00:57:14.421Z",
+  "updatedBy": "Rian (Kasir/Operator)",
+  "logs": [
+    {
+      "id": "CASH-MWN4CCXY",
+      "timestamp": "2026-11-19T05:37:42.022Z",
+      "type": "out",
+      "category": "Beli Perlengkapan Packing (Lakban/ATK)",
+      "amount": 15000,
+      "operator": "Rian (Kasir)",
+      "notes": "Beli lakban coklat 2 roll"
+    },
+    {
+      "id": "CASH-MWN4CCXU",
+      "timestamp": "2026-11-19T05:37:42.018Z",
+      "type": "in",
+      "category": "Tambahan Modal Kembalian dari Pemilik",
+      "amount": 50000,
+      "operator": "Rian (Kasir)",
+      "notes": "Diberikan uang kecil pecahan 2rb dan 5rb oleh bos"
+    },
+    {
+      "id": "CASH-MWN4CCX7",
+      "timestamp": "2026-11-19T05:37:41.995Z",
+      "type": "modal_awal",
+      "category": "Modal Kembalian Pemilik",
+      "amount": 250000,
+      "operator": "Bapak Hendra (Master Admin)",
+      "notes": "Modal awal uang kembalian pecahan kecil"
+    }
+  ]
+}
