@@ -1035,3 +1035,6 @@ server.listen(currentPort, '0.0.0.0', () => {
         exec(openCmd, () => {});
     }
 });
+
+module.exports = server;
+
