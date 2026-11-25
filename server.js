@@ -20,8 +20,12 @@ const ROOT_DIR = __dirname;
 const DATA_DIR = path.join(ROOT_DIR, 'data');
 
 // Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+try {
+    if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+} catch (e) {
+    // Read-only filesystem in serverless cloud environments (e.g. Vercel)
 }
 
 // JSON Database Files
@@ -124,7 +128,7 @@ const MIME_TYPES = {
     '.ttf': 'font/ttf'
 };
 
-const server = http.createServer(async (req, res) => {
+const requestHandler = async (req, res) => {
     // Handle CORS preflight
     if (req.method === 'OPTIONS') {
         res.writeHead(204, {
@@ -984,7 +988,7 @@ const server = http.createServer(async (req, res) => {
             stream.pipe(res);
         });
     });
-});
+};
 
 function getLocalIP() {
     try {
@@ -1000,60 +1004,67 @@ function getLocalIP() {
     return '127.0.0.1';
 }
 
-server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        if (attemptCount < MAX_PORT_ATTEMPTS) {
-            attemptCount++;
-            const nextPort = currentPort + 1;
-            console.log(`[PERINGATAN] Port ${currentPort} sedang digunakan oleh aplikasi lain.`);
-            console.log(`[INFO] Otomatis mencoba beralih ke port ${nextPort}...`);
-            currentPort = nextPort;
-            setTimeout(() => {
-                server.listen(currentPort, '0.0.0.0');
-            }, 150);
-            return;
+const server = http.createServer(requestHandler);
+
+// Hanya jalankan server.listen jika berjalan di server mandiri / komputer lokal (Bukan Vercel Serverless)
+if (!process.env.VERCEL && !process.env.NOW_REGION) {
+    server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            if (attemptCount < MAX_PORT_ATTEMPTS) {
+                attemptCount++;
+                const nextPort = currentPort + 1;
+                console.log(`[PERINGATAN] Port ${currentPort} sedang digunakan oleh aplikasi lain.`);
+                console.log(`[INFO] Otomatis mencoba beralih ke port ${nextPort}...`);
+                currentPort = nextPort;
+                setTimeout(() => {
+                    server.listen(currentPort, '0.0.0.0');
+                }, 150);
+                return;
+            }
+            console.error(`\n[ERROR] Tidak dapat menemukan port bebas setelah ${MAX_PORT_ATTEMPTS} percobaan!`);
+            console.error(`Silakan tentukan port manual: node server.js <nomor_port>\n`);
+        } else {
+            console.error('\n[ERROR Server]:', err.message);
         }
-        console.error(`\n[ERROR] Tidak dapat menemukan port bebas setelah ${MAX_PORT_ATTEMPTS} percobaan!`);
-        console.error(`Silakan tentukan port manual: node server.js <nomor_port>\n`);
-    } else {
-        console.error('\n[ERROR Server]:', err.message);
-    }
-    process.exit(1);
-});
+        process.exit(1);
+    });
 
-server.listen(currentPort, '0.0.0.0', () => {
-    const localIP = getLocalIP();
-    console.log(`\n========================================================`);
-    console.log(`  PERCETAKAN GILAR MEDIA - SERVER AKTIF & DATABASE JSON TERHUBUNG`);
-    console.log(`========================================================`);
-    console.log(`  * Direktori Proyek   : ${ROOT_DIR}`);
-    console.log(`  * Database JSON Path : ${DATA_DIR}`);
-    console.log(`  * Port Aktif         : ${currentPort}`);
-    console.log(`--------------------------------------------------------`);
-    console.log(`  AKSES DI KOMPUTER INI (LOCALHOST):`);
-    console.log(`  * Toko Online Pelanggan : http://localhost:${currentPort}/`);
-    console.log(`  * Portal Kasir POS      : http://localhost:${currentPort}/kasir/`);
-    console.log(`  * Master Admin Panel    : http://localhost:${currentPort}/admin/`);
-    if (localIP && localIP !== '127.0.0.1') {
+    server.listen(currentPort, '0.0.0.0', () => {
+        const localIP = getLocalIP();
+        console.log(`\n========================================================`);
+        console.log(`  PERCETAKAN GILAR MEDIA - SERVER AKTIF & DATABASE JSON TERHUBUNG`);
+        console.log(`========================================================`);
+        console.log(`  * Direktori Proyek   : ${ROOT_DIR}`);
+        console.log(`  * Database JSON Path : ${DATA_DIR}`);
+        console.log(`  * Port Aktif         : ${currentPort}`);
         console.log(`--------------------------------------------------------`);
-        console.log(`  AKSES DARI HP / LAPTOP LAIN (JARINGAN WI-FI / LAN SAMA):`);
-        console.log(`  * Toko Online Pelanggan : http://${localIP}:${currentPort}/`);
-        console.log(`  * Portal Kasir POS      : http://${localIP}:${currentPort}/kasir/`);
-        console.log(`  * Master Admin Panel    : http://${localIP}:${currentPort}/admin/`);
-    }
-    console.log(`========================================================\n`);
+        console.log(`  AKSES DI KOMPUTER INI (LOCALHOST):`);
+        console.log(`  * Toko Online Pelanggan : http://localhost:${currentPort}/`);
+        console.log(`  * Portal Kasir POS      : http://localhost:${currentPort}/kasir/`);
+        console.log(`  * Master Admin Panel    : http://localhost:${currentPort}/admin/`);
+        if (localIP && localIP !== '127.0.0.1') {
+            console.log(`--------------------------------------------------------`);
+            console.log(`  AKSES DARI HP / LAPTOP LAIN (JARINGAN WI-FI / LAN SAMA):`);
+            console.log(`  * Toko Online Pelanggan : http://${localIP}:${currentPort}/`);
+            console.log(`  * Portal Kasir POS      : http://${localIP}:${currentPort}/kasir/`);
+            console.log(`  * Master Admin Panel    : http://${localIP}:${currentPort}/admin/`);
+        }
+        console.log(`========================================================\n`);
 
-    // Otomatis buka browser default jika tidak dinonaktifkan (hanya di komputer lokal)
-    const isCloudEnv = Boolean(process.env.RENDER || process.env.RAILWAY_STATIC_URL || process.env.PORT || process.env.NODE_ENV === 'production');
-    const noOpen = process.argv.includes('--no-open') || process.env.AUTO_OPEN === 'false' || isCloudEnv;
-    if (!noOpen) {
-        const targetUrl = `http://localhost:${currentPort}/`;
-        const openCmd = process.platform === 'win32' ? `start "" "${targetUrl}"` :
-                        process.platform === 'darwin' ? `open "${targetUrl}"` :
-                        `xdg-open "${targetUrl}"`;
-        exec(openCmd, () => {});
-    }
-});
+        // Otomatis buka browser default jika tidak dinonaktifkan (hanya di komputer lokal)
+        const isCloudEnv = Boolean(process.env.RENDER || process.env.RAILWAY_STATIC_URL || process.env.PORT || process.env.NODE_ENV === 'production');
+        const noOpen = process.argv.includes('--no-open') || process.env.AUTO_OPEN === 'false' || isCloudEnv;
+        if (!noOpen) {
+            const targetUrl = `http://localhost:${currentPort}/`;
+            const openCmd = process.platform === 'win32' ? `start "" "${targetUrl}"` :
+                            process.platform === 'darwin' ? `open "${targetUrl}"` :
+                            `xdg-open "${targetUrl}"`;
+            exec(openCmd, () => {});
+        }
+    });
+}
 
-module.exports = server;
+module.exports = requestHandler;
+module.exports.server = server;
+
 
